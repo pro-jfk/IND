@@ -1,10 +1,10 @@
-using Core.Entities;
+using Core.Entities.Mail;
 
 namespace App.Services.impl;
 
-public class MailStatusService
+public class MailStatusService : IMailStatusService
 {
-    public static MailStatus Get(int id)
+    public async Task<MailStatus> Get(int id)
     {
         var date = DateTime.Now;
         MailStatus mail = new MailStatus()

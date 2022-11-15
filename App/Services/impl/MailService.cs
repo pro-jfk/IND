@@ -1,10 +1,10 @@
-using Core.Entities;
+using Core.Entities.Mail;
 
 namespace App.Services.impl;
 
-public class MailService
+public class MailService : IMailService
 {
-    public static Mail Get(int id)
+    public async Task<Mail> Get(int id)
     {
         Mail mail = new Mail()
         {
