@@ -15,4 +15,32 @@ public class MailController : ApiController
         ApiResult<Mail> results = ApiResult<Mail>.Succes(mail);
         return Ok(results);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Post([FromServices] IMailService mailService, string message, int vNumber)
+    {
+        var mail = new Mail()
+        {
+            Message = message,
+            Vnumber = vNumber,
+            MailStatus = new MailStatus()
+            {
+                VNumber = vNumber,
+                DateSent = "",
+                Message = "",
+            }
+        };
+        
+        Mail mail2 = await mailService.CreateMail(mail);
+        ApiResult<Mail> results = ApiResult<Mail>.Succes(mail2);
+        return Ok(results);
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromServices] IMailService mailService, int id)
+    {
+        var result = await mailService.DeleteMail(id);
+
+        return result ? Ok() : NotFound();
+    }
 }
