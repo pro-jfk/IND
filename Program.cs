@@ -1,9 +1,13 @@
+using Core.Entities;
+using Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDataServices(builder.Configuration);
 builder.Services.AddControllers();
-// builder.Services.AddDbContext<Data.Class1>();
+//builder.Services
+  
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
