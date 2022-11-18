@@ -13,5 +13,5 @@ public class AuthTokens
 
     public string PoleID { get; set; }
     public Pole Pole { get; set; }
-    //FK Pole or CUstomer??
+    
 }
