@@ -5,7 +5,7 @@ namespace Core.Entities;
 
 public class Customer
 {
-    //TODO ADD FOREIGN KEYS AND CONFIG MYSGLQ DB AND MIGRATIONS
+    
    
     public int ID { get; set; }
     
