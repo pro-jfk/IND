@@ -6,9 +6,9 @@ namespace App.Services.impl;
 
 public class MailService : IMailService
 {
-    private readonly ApplicationDbContext _dbContext;
+    private readonly IndContext _dbContext;
 
-    public MailService(ApplicationDbContext dbContext)
+    public MailService(IndContext dbContext)
     {
         _dbContext = dbContext;
     }
