@@ -11,7 +11,7 @@ public class AuthTokens
     public int revoked { get; set; }
 
 
-    public string PoleID { get; set; }
+    public int PoleID { get; set; }
     public Pole Pole { get; set; }
     
 }

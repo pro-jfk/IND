@@ -6,13 +6,13 @@ namespace Core.Entities;
 
 public class Customer_Message
 {
-    //TODO Configuring PK AND FK
+    
     public bool StatusReceived { get; set; }
     public bool StatusPrinted { get; set; }
     public DateTime DateReceived { get; set; }
     
     
-    public string MessageID { get; set; }
+    public int MessageID { get; set; }
     public Message Message { get; set; }
     
     
