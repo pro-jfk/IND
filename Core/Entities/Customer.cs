@@ -8,7 +8,7 @@ public class Customer : BaseEntity
 {
     
    
-    public int ID { get; set; }
+    public int Id { get; set; }
     
     public string LastName { get; set; }
     public string MiddleName { get; set; }
@@ -20,7 +20,7 @@ public class Customer : BaseEntity
     public List<Message>? Messages { get; set; }
 
     
-    public int LocationID { get; set; }
+    public int LocationId { get; set; }
     public EmergencyShelter EmergencyShelter { get; set; }
    
 }

@@ -4,14 +4,14 @@ namespace Core.Entities;
 
 public class AuthTokens
 {
-    public string ID { get; set; }
+    public string Id { get; set; }
     public string name { get; set; }
     public string slug { get; set; }
     public string token { get; set; }
     public int revoked { get; set; }
 
 
-    public int PoleID { get; set; }
+    public int PoleId { get; set; }
     public Pole Pole { get; set; }
     
 }

@@ -13,7 +13,7 @@ public class Message
     public string FileURL { get; set; }
     
     
-    public int customer { get; set; }
+    public int CustomerId { get; set; }
     public Customer Customer { get; set; }
 
 }

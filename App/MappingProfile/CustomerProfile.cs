@@ -13,7 +13,7 @@ public class CustomerProfile : Profile
             .IgnoreDestination(c => c.DateAdded)
             .IgnoreDestination(c => c.Messages)
             .IgnoreDestination(c => c.EmergencyShelter)
-            .IgnoreDestination(c => c.ID);
+            .IgnoreDestination(c => c.Id);
         
         CreateMap<Customer, CustomerResponse>();
     }

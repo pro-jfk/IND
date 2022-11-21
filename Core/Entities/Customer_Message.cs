@@ -12,11 +12,11 @@ public class Customer_Message
     public DateTime DateReceived { get; set; }
     
     
-    public int MessageID { get; set; }
+    public int MessageId { get; set; }
     public Message Message { get; set; }
     
     
-    public int CustomerID { get; set; }
+    public int CustomerId { get; set; }
     public Customer Customer { get; set; }
 
 
