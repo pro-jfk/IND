@@ -1,0 +1,21 @@
+using Data.Repositories;
+using Data.Repositories.Impl;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Data;
+
+public static class DependencyInjection
+{
+    public static IServiceCollection AddDataAccess(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddRepositories();
+
+        return services;
+    }
+
+    private static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+    }
+}

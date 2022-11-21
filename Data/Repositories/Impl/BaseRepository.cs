@@ -1,18 +1,16 @@
-using System.Globalization;
 using System.Linq.Expressions;
 using Core.Common;
 using Core.Exceptions;
-using Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace App.Services.impl;
+namespace Data.Repositories.Impl;
 
-public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : BaseEntity
+public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
 {
     protected readonly IndContext Context;
     protected readonly DbSet<TEntity> DbSet;
 
-    public BaseService(IndContext context)
+    public BaseRepository(IndContext context)
     {
         Context = context;
         DbSet = context.Set<TEntity>();

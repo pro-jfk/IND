@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Core.Common;
 
 namespace Core.Entities;
 
-public class Customer
+public class Customer : BaseEntity
 {
     //TODO ADD FOREIGN KEYS AND CONFIG MYSGLQ DB AND MIGRATIONS
    
@@ -16,10 +17,10 @@ public class Customer
     public DateTime DateAdded { get; set; }
     public string LocationID { get; set; }
     
-    public List<Message> Messages { get; set; }
+    public List<Message>? Messages { get; set; }
 
     
     public string Location { get; set; }
-    public EmergencyShelter EmergencyShelter { get; set; }
+    public EmergencyShelter? EmergencyShelter { get; set; }
    
 }

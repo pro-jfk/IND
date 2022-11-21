@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDataServices(builder.Configuration);
+builder.Services.AddDataAccess(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 
 builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
