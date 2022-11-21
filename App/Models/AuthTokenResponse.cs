@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace App.Models;
 
-namespace Core.Entities;
-
-public class AuthTokens
+public class AuthTokenResponse
 {
-    public string ID { get; set; }
     public string name { get; set; }
     public string slug { get; set; }
     public string token { get; set; }
@@ -12,6 +9,4 @@ public class AuthTokens
 
 
     public int PoleID { get; set; }
-    public Pole Pole { get; set; }
-    
 }

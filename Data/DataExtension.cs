@@ -12,7 +12,9 @@ public static class DataExtension
         var connectionString = configuration.GetConnectionString("default");
 
         services.AddDbContext<IndContext>(options =>
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+                .LogTo(Console.WriteLine)
+                .EnableSensitiveDataLogging());
 
         return services;
     }

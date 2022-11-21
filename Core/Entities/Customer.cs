@@ -6,7 +6,7 @@ namespace Core.Entities;
 
 public class Customer : BaseEntity
 {
-    //TODO ADD FOREIGN KEYS AND CONFIG MYSGLQ DB AND MIGRATIONS
+    
    
     public int ID { get; set; }
     
@@ -15,12 +15,12 @@ public class Customer : BaseEntity
     public string FirstName { get; set; }
     public string Origin { get; set; }
     public DateTime DateAdded { get; set; }
-    public string LocationID { get; set; }
+  
     
     public List<Message>? Messages { get; set; }
 
     
-    public string Location { get; set; }
-    public EmergencyShelter? EmergencyShelter { get; set; }
+    public int LocationID { get; set; }
+    public EmergencyShelter EmergencyShelter { get; set; }
    
 }
