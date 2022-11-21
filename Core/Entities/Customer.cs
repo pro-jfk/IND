@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Core.Common;
 
 namespace Core.Entities;
 
-public class Customer
+public class Customer : BaseEntity
 {
     
    
@@ -16,7 +17,7 @@ public class Customer
     public DateTime DateAdded { get; set; }
   
     
-    public List<Message> Messages { get; set; }
+    public List<Message>? Messages { get; set; }
 
     
     public int LocationID { get; set; }
