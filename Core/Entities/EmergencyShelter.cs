@@ -2,7 +2,7 @@
 
 public class EmergencyShelter
 {
-    public string ID { get; set; }
+    public int ID { get; set; }
     public string Town { get; set; }
     public string Adress { get; set; }
     public int CustomerAmount { get; set; }
