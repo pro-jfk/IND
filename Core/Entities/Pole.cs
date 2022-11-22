@@ -4,7 +4,7 @@ namespace Core.Entities;
 
 public class Pole
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
     
     
     public int Location { get; set; }

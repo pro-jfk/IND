@@ -19,7 +19,7 @@ public class IndContext : DbContext
     {
         modelBuilder.Entity<Customer_Message>()
             .HasKey(t => new{t.CustomerId,t.MessageId}); //Creates Compound PKey for joined table Customer_Messages
-
-
+            
+        
     }
 }

@@ -1,12 +1,13 @@
 ﻿namespace App.Models;
 
-public class Customer_MessageResponse
+public class CreateCustomer_Message
 {
     public bool StatusReceived { get; set; }
     public bool StatusPrinted { get; set; }
     public DateTime DateReceived { get; set; }
     
-    public int MessageID { get; set; }
+    
+    public int MessageId { get; set; }
 
-    public int CustomerID { get; set; }
+    public int CustomerId { get; set; }
 }

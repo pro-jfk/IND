@@ -8,5 +8,5 @@ public class AuthTokenResponse
     public int revoked { get; set; }
 
 
-    public int PoleID { get; set; }
+    public int PoleId { get; set; }
 }
