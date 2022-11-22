@@ -13,6 +13,8 @@ public class Customer
     public string MiddleName { get; set; }
     public string FirstName { get; set; }
     public string Origin { get; set; }
+    public string Language { get; set; }
+    public string PhoneNumber { get; set; }
     public DateTime DateAdded { get; set; }
   
     
