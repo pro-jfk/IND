@@ -1,7 +1,7 @@
 ﻿namespace App.Models;
 
-public class PoleDTO
+public class Pole
 {
     public int PoleId { get; set; }
-    public int LocationId { get; set; }
+    
 }
