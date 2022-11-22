@@ -18,8 +18,8 @@ public class IndContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Customer_Message>()
-            .HasKey(t => new{t.CustomerID,t.MessageID}); //Creates Compound PKey for joined table Customer_Messages
-
+            .HasKey(t => new{t.CustomerId,t.MessageId}); //Creates Compound PKey for joined table Customer_Messages
+            
         
     }
 }

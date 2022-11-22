@@ -6,5 +6,5 @@ public class CustomerResponse
     public string MiddleName { get; set; }
     public string FirstName { get; set; }
     public string Origin { get; set; }
-    public string LocationID { get; set; }
+    public int LocationId { get; set; }
 }
