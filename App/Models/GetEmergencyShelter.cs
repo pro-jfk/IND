@@ -1,6 +1,6 @@
 ﻿namespace App.Models;
 
-public class EmergencyShelter
+public class GetEmergencyShelter
 {
     public int Id { get; set; }
 }

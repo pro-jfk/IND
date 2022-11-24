@@ -22,7 +22,7 @@ public class Customer : BaseEntity
     public List<Message>? Messages { get; set; }
 
     
-    public int LocationId { get; set; }
+    public int EmergencyShelterId { get; set; }
     public EmergencyShelter EmergencyShelter { get; set; }
    
 }

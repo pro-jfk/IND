@@ -9,11 +9,9 @@ public class CustomerProfile : Profile
 {
     public CustomerProfile()
     {
-        CreateMap<CreateCustomerModel, Customer>()
+        CreateMap<CreateCustomer, Customer>()
             .IgnoreDestination(c => c.DateAdded)
-            .IgnoreDestination(c => c.Messages)
-            .IgnoreDestination(c => c.EmergencyShelter)
-            .IgnoreDestination(c => c.Id);
+            .IgnoreDestination(c => c.Messages);
         
         CreateMap<Customer, CustomerResponse>();
     }

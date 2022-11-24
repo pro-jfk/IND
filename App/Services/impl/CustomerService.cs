@@ -17,9 +17,9 @@ public class CustomerService : ICustomerService
         _mapper = mapper;
     }
     
-    public async Task<CustomerResponse> CreateCustomer(CreateCustomerModel createCustomerModel)
+    public async Task<CustomerResponse> CreateCustomer(CreateCustomer createCustomer)
     {
-        Customer customer = _mapper.Map<Customer>(createCustomerModel);
+        Customer customer = _mapper.Map<Customer>(createCustomer);
         customer.DateAdded = DateTime.Now;
         Customer result = await _customerRepository.AddAsync(customer);
         return _mapper.Map<CustomerResponse>(result);
