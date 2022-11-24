@@ -21,7 +21,7 @@ public class Customer
     public List<Message> Messages { get; set; }
 
     
-    public int LocationID { get; set; }
+    public int EmergencyShelterId { get; set; }
     public EmergencyShelter EmergencyShelter { get; set; }
    
 }
