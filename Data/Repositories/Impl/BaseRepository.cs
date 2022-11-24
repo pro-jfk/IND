@@ -35,7 +35,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         var addedEntity = (await DbSet.AddAsync(entity)).Entity;
         await Context.SaveChangesAsync();
 
-        return entity;
+        return addedEntity;
     }
 
     public async Task<TEntity> UpdateAsync(TEntity entity)

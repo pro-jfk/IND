@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Core.Common;
 
 namespace Core.Entities;
 
-public class Message
+public class Message : BaseEntity
 {
  
     public int Id { get; set; }
