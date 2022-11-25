@@ -13,5 +13,4 @@ public class AuthTokens
 
     public int PoleId { get; set; }
     public Pole Pole { get; set; }
-    
 }

@@ -7,6 +7,6 @@ public class Pole
     public int Id { get; set; }
     
     
-    public int Location { get; set; }
+    public int EmergencyShelterId { get; set; }
     public EmergencyShelter EmergencyShelter { get; set; }
 }

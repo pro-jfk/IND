@@ -23,5 +23,4 @@ public class Customer
     
     public int EmergencyShelterId { get; set; }
     public EmergencyShelter EmergencyShelter { get; set; }
-   
 }
