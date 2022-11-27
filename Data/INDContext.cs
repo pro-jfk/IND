@@ -6,7 +6,7 @@ namespace Data;
 
 public class IndContext : DbContext
 {
-    
+    //TODO run removed middlename migration
     public IndContext (DbContextOptions<IndContext>options) : base(options){}
     
     public DbSet<Customer> Customers { get; set; }
