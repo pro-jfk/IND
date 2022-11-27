@@ -6,7 +6,10 @@ namespace Data;
 
 public class IndContext : DbContext
 {
-    
+    /// <summary>
+    /// A DbContext instance represents a session with the database and can be used to query and save instances of your entities
+    /// </summary>
+    /// <param name="options"></param>
     public IndContext (DbContextOptions<IndContext>options) : base(options){}
     
     public DbSet<Customer> Customers { get; set; }
