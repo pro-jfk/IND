@@ -1,4 +1,5 @@
 using App.Models;
+using App.Responses;
 using App.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,12 @@ namespace API.Controllers;
 
 public class CustomerController: ApiController
 {
+    /// <summary>
+    /// Post request that creates a new Customer.
+    /// </summary>
+    /// <param name="customerService"></param>
+    /// <param name="createCustomer"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> CreateCustomer([FromServices] ICustomerService customerService,
         CreateCustomer createCustomer)
