@@ -8,6 +8,9 @@ namespace App.MappingProfile;
 
 public class MessageProfile : Profile
 {
+    /// <summary>
+    /// Creates a map for messages
+    /// </summary>
     public MessageProfile()
     {
         CreateMap<GetMessage, Message>()

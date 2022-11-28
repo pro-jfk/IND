@@ -9,7 +9,7 @@ namespace App.MappingProfile;
 public class CustomerProfile : Profile
 {
     /// <summary>
-    /// 
+    /// Mapping of customer which ignores Dateadded and message when creating a new customer.
     /// </summary>
     public CustomerProfile()
     {
