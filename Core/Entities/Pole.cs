@@ -4,9 +4,10 @@ namespace Core.Entities;
 
 public class Pole
 {
+    // Vnumber
     public int Id { get; set; }
     
-    
+    //Location of COA location
     public int Location { get; set; }
     public EmergencyShelter EmergencyShelter { get; set; }
 }

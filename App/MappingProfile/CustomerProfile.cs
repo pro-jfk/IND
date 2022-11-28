@@ -8,6 +8,9 @@ namespace App.MappingProfile;
 
 public class CustomerProfile : Profile
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public CustomerProfile()
     {
         CreateMap<CreateCustomer, Customer>()

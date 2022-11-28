@@ -17,7 +17,11 @@ public class CustomerService : ICustomerService
         _customerRepository = customerRepository;
         _mapper = mapper;
     }
-    
+    /// <summary>
+    /// Create customer from the CustomerRepository
+    /// </summary>
+    /// <param name="createCustomer">CreateCustomer</param>
+    /// <returns>Type: CustomerResponse</returns>
     public async Task<CustomerResponse> CreateCustomer(CreateCustomer createCustomer)
     {
         Customer customer = _mapper.Map<Customer>(createCustomer);

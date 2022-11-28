@@ -15,7 +15,13 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         Context = context;
         DbSet = context.Set<TEntity>();
     }
-
+    
+    /// <summary>
+    /// Gets first Async
+    /// </summary>
+    /// <param name="predicate">id</param>
+    /// <returns>Type: TEntitY</returns>
+    /// <exception cref="ResourceNotFoundException">not in db</exception>
     public async Task<TEntity> GetFirstASync(Expression<Func<TEntity, bool>> predicate)
     {
         var entity = await DbSet.Where(predicate).FirstOrDefaultAsync();
@@ -24,12 +30,22 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
         return await DbSet.Where(predicate).FirstOrDefaultAsync();
     }
-
+    
+    /// <summary>
+    /// Get all Async
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <returns>Type: TEntity</returns>
     public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
     {
         return await DbSet.Where(predicate).ToListAsync();
     }
-
+    
+    /// <summary>
+    /// Add Async
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
     public async Task<TEntity> AddAsync(TEntity entity)
     {
         var addedEntity = (await DbSet.AddAsync(entity)).Entity;
@@ -38,6 +54,11 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return addedEntity;
     }
 
+    /// <summary>
+    /// Update Async
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
         DbSet.Update(entity);
@@ -46,6 +67,11 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return entity;
     }
 
+    /// <summary>
+    /// Delete Async
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
     public async Task<TEntity> DeleteAsync(TEntity entity)
     {
         var removedEntity = DbSet.Remove(entity).Entity;
