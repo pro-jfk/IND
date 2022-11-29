@@ -20,7 +20,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     /// Gets first Async
     /// </summary>
     /// <param name="predicate">id</param>
-    /// <returns>Type: TEntitY</returns>
+    /// <returns>Type: TEntity</returns>
     /// <exception cref="ResourceNotFoundException">not in db</exception>
     public async Task<TEntity> GetFirstASync(Expression<Func<TEntity, bool>> predicate)
     {
@@ -34,7 +34,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     /// <summary>
     /// Get all Async
     /// </summary>
-    /// <param name="predicate"></param>
+    /// <param name="predicate">id</param>
     /// <returns>Type: TEntity</returns>
     public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
     {
@@ -44,8 +44,8 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     /// <summary>
     /// Add Async
     /// </summary>
-    /// <param name="entity"></param>
-    /// <returns></returns>
+    /// <param name="entity">TEntity</param>
+    /// <returns>Type: TEntity - addedEntity</returns>
     public async Task<TEntity> AddAsync(TEntity entity)
     {
         var addedEntity = (await DbSet.AddAsync(entity)).Entity;
@@ -57,8 +57,8 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     /// <summary>
     /// Update Async
     /// </summary>
-    /// <param name="entity"></param>
-    /// <returns></returns>
+    /// <param name="entity">TEntity</param>
+    /// <returns>Type: TENtity - entity</returns>
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
         DbSet.Update(entity);
@@ -70,8 +70,8 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     /// <summary>
     /// Delete Async
     /// </summary>
-    /// <param name="entity"></param>
-    /// <returns></returns>
+    /// <param name="entity">TEntity</param>
+    /// <returns>Type: TEntity - removedEntity</returns>
     public async Task<TEntity> DeleteAsync(TEntity entity)
     {
         var removedEntity = DbSet.Remove(entity).Entity;

@@ -14,8 +14,9 @@ public class MessageController : ApiController
     /// Get message from MessageService
     /// </summary>
     /// <param name="messageService"></param>
-    /// <param name="id"></param>
+    /// <param name="id">Int</param>
     /// <returns>Type MessageRepsonse from MessageService</returns>
+    /// TODO Add param types, look at id for example
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetMessage([FromServices] IMessageService messageService, int id)
     {
