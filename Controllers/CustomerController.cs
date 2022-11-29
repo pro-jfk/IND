@@ -12,8 +12,7 @@ public class CustomerController: ApiController
     /// </summary>
     /// <param name="customerService"></param>
     /// <param name="createCustomer"></param>
-    /// <returns></returns>
-    /// TODO add return
+    /// <returns>Type CustomerResponse from CustomerService</returns>
     [HttpPost]
     public async Task<IActionResult> CreateCustomer([FromServices] ICustomerService customerService,
         CreateCustomer createCustomer)

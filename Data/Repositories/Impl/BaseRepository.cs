@@ -58,7 +58,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     /// Update Async
     /// </summary>
     /// <param name="entity">TEntity</param>
-    /// <returns>Type: TENtity - entity</returns>
+    /// <returns>Type: TEntity - entity</returns>
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
         DbSet.Update(entity);

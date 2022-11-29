@@ -13,7 +13,7 @@ public class MessageController : ApiController
     /// <summary>
     /// Get message from MessageService
     /// </summary>
-    /// <param name="messageService"></param>
+    /// <param name="messageService">TEntity</param>
     /// <param name="id">Int</param>
     /// <returns>Type MessageRepsonse from MessageService</returns>
     /// TODO Add param types, look at id for example
