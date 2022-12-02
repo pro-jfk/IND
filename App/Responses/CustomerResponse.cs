@@ -1,4 +1,4 @@
-﻿namespace App.Responses;
+﻿namespace App.Models;
 
 public class CustomerResponse
 {
