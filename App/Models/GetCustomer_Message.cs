@@ -7,6 +7,8 @@ public class GetCustomer_Message
     //Customer ID
     public int CustomerId { get; set; }
     
+    public int TimesPrinted { get; set; }
+    
     //message received
     public bool StatusReceived { get; set; }
     //message printed

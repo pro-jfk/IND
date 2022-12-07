@@ -8,6 +8,8 @@ public class CreateCustomer_Message
     public bool StatusPrinted { get; set; }
     //Date when message was received
     public DateTime DateReceived { get; set; }
+
+    public int TimesPrinted { get; set; }
     
     //Message ID
     public int MessageId { get; set; }
