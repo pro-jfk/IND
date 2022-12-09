@@ -17,11 +17,11 @@ public class IndContext : DbContext
     public DbSet<EmergencyShelter> EmergencyShelters { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<Pole> Poles { get; set; }
-    public DbSet<Customer_Message> Customer_Messages { get; set; }
+    public DbSet<CustomerMessage> Customer_Messages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Customer_Message>()
+        modelBuilder.Entity<CustomerMessage>()
             .HasKey(t => new{t.CustomerId,t.MessageId}); //Creates Compound PKey for joined table Customer_Messages
             
         

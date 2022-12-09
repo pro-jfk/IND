@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Core.Entities;
 
 
-public class Customer_Message
+public class CustomerMessage
 {
     //If message is received by Customer
     public bool StatusReceived { get; set; }

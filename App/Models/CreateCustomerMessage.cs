@@ -1,6 +1,6 @@
 ﻿namespace App.Models;
 
-public class CreateCustomer_Message
+public class CreateCustomerMessage
 {
     //Message received
     public bool StatusReceived { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace App.Models;
 
-public class GetCustomer_Message
+public class GetCustomerMessage
 {
     //Message ID
     public int MessageId { get; set; }

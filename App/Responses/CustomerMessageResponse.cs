@@ -1,6 +1,6 @@
 ﻿namespace App.Responses;
 
-public class Customer_MessageResponse
+public class CustomerMessageResponse
 {
     //If message is recieved by Customer
     public bool StatusReceived { get; set; }
