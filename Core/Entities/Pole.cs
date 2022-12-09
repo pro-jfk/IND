@@ -2,7 +2,7 @@
 
 namespace Core.Entities;
 
-public class Pole
+public class Pole 
 {
     // Vnumber
     public int Id { get; set; }

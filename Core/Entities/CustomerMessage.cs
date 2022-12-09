@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Core.Common;
 
 namespace Core.Entities;
 
 
-public class CustomerMessage
+public class CustomerMessage : BaseEntity
 {
     //If message is received by Customer
     public bool StatusReceived { get; set; }

@@ -18,5 +18,6 @@ public static class DependencyInjection
     {
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
+        services.AddScoped<ICustomerMessageRepository, CustomerMessageRepository>();
     }
 }
