@@ -18,5 +18,6 @@ public class CustomerProfile : Profile
             .IgnoreDestination(c => c.Messages);
         
         CreateMap<Customer, CustomerResponse>();
+        CreateMap<List<Customer>, List<CustomerResponse>>();
     }
 }

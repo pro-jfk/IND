@@ -4,7 +4,7 @@ namespace Core.Entities;
 
 public class Pole
 {
-    // Vnumber
+    // PoleNumber
     public int Id { get; set; }
     
     //Location of COA location

@@ -19,7 +19,7 @@ public interface IMessageRepository
     /// </summary>
     /// <param name="predicate">id</param>
     /// <returns>Type: TEntity</returns>
-    Task<List<Message>> GetAllAsync(Expression<Func<Message, bool>> predicate);
+    Task<List<Message>> GetAllAsync();
     
     /// <summary>
     /// Add Async

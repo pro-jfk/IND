@@ -36,9 +36,9 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     /// </summary>
     /// <param name="predicate">id</param>
     /// <returns>Type: TEntity</returns>
-    public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+    public async Task<List<TEntity>> GetAllAsync()
     {
-        return await DbSet.Where(predicate).ToListAsync();
+        return await DbSet.ToListAsync();
     }
     
     /// <summary>
