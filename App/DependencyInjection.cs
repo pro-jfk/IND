@@ -1,6 +1,7 @@
 using App.MappingProfile;
 using App.Services;
 using App.Services.impl;
+using Core.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,7 @@ public static class DependencyInjection
     {
         //services.AddScoped<IMailService, MailService>();
         //services.AddScoped<IMailStatusService, MailStatusService>();
+        services.AddScoped<IEmergencyShelterService, EmergencyShelterService>();
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IMessageService, MessageService>();
     }

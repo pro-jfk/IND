@@ -8,8 +8,7 @@ public interface ICustomerService
 {
     Task<CustomerResponse> CreateCustomer(CreateCustomer createCustomer);
     Task<CustomerResponse> GetCustomer(int id);
-
     Task<IEnumerable<CustomerResponse>> GetCustomers();
-    // Task<CustomerResponse> UpdateCustomer(UpdateCustomer updateCustomer);
-    // Task<CustomerResponse> DeleteCustomer(DeleteCustomer deleteCustomer);
+    Task<CustomerResponse> UpdateCustomer(CreateCustomer createCustomer);
+    Task<CustomerResponse> DeleteCustomer(int id);
 }

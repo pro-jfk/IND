@@ -42,13 +42,17 @@ public class CustomerService : ICustomerService
         return _mapper.Map<List<CustomerResponse>>(result);
     }
 
-    // public async Task<CustomerResponse> UpdateCustomer(UpdateCustomer updateCustomer)
-    // {
-    //     Customer customer = _mapper
-    // }
-    //
-    // public async Task<CustomerResponse> DeleteCustomer(DeleteCustomer deleteCustomer)
-    // {
-    //     Customer result = async 
-    // }
+    public async Task<CustomerResponse> UpdateCustomer(CreateCustomer updateCustomer)
+    {
+        Customer customer = _mapper.Map<Customer>(UpdateCustomer);
+        Customer result = await _customerRepository.UpdateAsync(customer);
+        return _mapper.Map<CustomerResponse>(result);
+    }
+    
+    public async Task<CustomerResponse> DeleteCustomer(int id)
+    {
+        Customer customer = await _customerRepository.GetFirstASync(c => c.Id == id);
+        Customer result = await _customerRepository.DeleteAsync(customer);
+        return _mapper.Map<CustomerResponse>(result);
+    }
 }

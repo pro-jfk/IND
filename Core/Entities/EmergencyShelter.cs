@@ -1,6 +1,8 @@
-﻿namespace Core.Entities;
+﻿using Core.Common;
 
-public class EmergencyShelter
+namespace Core.Entities;
+
+public class EmergencyShelter : BaseEntity
 {
     //Number of EmergencyShelter
     public int Id { get; set; }
