@@ -36,10 +36,10 @@ public class CustomerService : ICustomerService
         return _mapper.Map<CustomerResponse>(result);
     }
     
-    public async Task<List<Customer>> GetCustomers()
+    public async Task<IEnumerable<CustomerResponse>> GetCustomers()
     {
         List<Customer> result = await _customerRepository.GetAllAsync();
-        return result;
+        return _mapper.Map<List<CustomerResponse>>(result);
     }
 
     // public async Task<CustomerResponse> UpdateCustomer(UpdateCustomer updateCustomer)

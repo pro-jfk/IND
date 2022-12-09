@@ -32,11 +32,11 @@ public class CustomerController: ApiController
         return Ok(result);
     }
     
-    // [HttpGet]
-    // public async Task<IActionResult> GetCustomers([FromServices] ICustomerService customerService)
-    // {
-    //     List<Customer> customer = await customerService.GetCustomers();
-    //     ApiResult<List<Customer>> result = ApiResult<List<Customer>>.Succes(customer);
-    //     return Ok(result);
-    // }
+    [HttpGet]
+    public async Task<IActionResult> GetCustomers([FromServices] ICustomerService customerService)
+    {
+        IEnumerable<CustomerResponse> customer = await customerService.GetCustomers();
+        ApiResult<IEnumerable<CustomerResponse>> result = ApiResult<IEnumerable<CustomerResponse>>.Succes(customer);
+        return Ok(result);
+    }
 }
