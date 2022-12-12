@@ -45,7 +45,7 @@ public class CustomerMessageService : ICustomerMessageService
         string encodeUri = Convert.ToBase64String(bytes);
         sharedClient.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Basic", encodeUri);
-        
+
         // using StringContent jsonContent = new(
         //     JsonSerializer.Serialize(new
         //     {
@@ -56,28 +56,31 @@ public class CustomerMessageService : ICustomerMessageService
         //     }),
         //     Encoding.UTF8,
         //     "application/x-www-form-urlencoded");
-
+        var bytes_test = Encoding.UTF8.GetBytes("helo");
+        string testContent = Convert.ToBase64String(bytes_test);
         var values = new Dictionary<string, string>
         {
-            { "printerId", "71890639" },
+            { "printerId", "71908910" },
             { "title", "example" },
-            { "contentType", "pdf_uri" },
-            { "content", "https://api.printnode.com/static/test/pdf/a4_10_pages.pdf" }
+            { "contentType", "raw_base64" },
+            {
+                "content",
+                testContent
+            }
         };
         var content = new FormUrlEncodedContent(values);
-        var response = await sharedClient.PostAsync(sharedClient.BaseAddress, content);
+        using var response = await sharedClient.PostAsync(sharedClient.BaseAddress, content);
         var responseString = await response.Content.ReadAsStringAsync();
         // using HttpResponseMessage response = await sharedClient.PostAsync(
         //     sharedClient.BaseAddress,
         //     jsonContent);
-        
+
         Console.WriteLine(responseString);
-        
+
         var jsonResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine($"{jsonResponse}\n");
-     
     }
-    
+
 
     public CustomerMessageResponse NotImplementedException { get; }
     
