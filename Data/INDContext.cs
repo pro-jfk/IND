@@ -17,7 +17,7 @@ public class IndContext : DbContext
     public DbSet<EmergencyShelter> EmergencyShelters { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<Pole> Poles { get; set; }
-    public DbSet<CustomerMessage> Customer_Messages { get; set; }
+    public DbSet<CustomerMessage> CustomerMessage { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
