@@ -7,4 +7,5 @@ namespace App.Services;
 public interface ICustomerMessageService
 {
     public Task<CustomerMessageResponse> CreateCustomerMessage(CreateCustomerMessage createCustomerMessage);
+   
 }

@@ -1,6 +1,5 @@
-﻿using System.Net;
-using System.Text;
-using System.Text.Json;
+﻿using App.Models;
+using App.Responses;
 using App.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,13 +8,16 @@ namespace API.Controllers;
 public class CustomerMessageController : ApiController
 {
 
+    //PrintNode API token and API
     private static HttpClient sharedClient = new()
     {
-        BaseAddress = new Uri("https://api.printnode.com"),
+        BaseAddress = new Uri("https://api.printnode.com/printjobs"),
 
     };
 
     private readonly string ApiToken = "cX6VaQJ61hZDim6R-0dMLGdfvMwN1tiQ0Wuv2MilRgs";
+
+
 
     //TODO GET printjob details
     //TODO Post request to call PRINTJOB
@@ -27,41 +29,17 @@ public class CustomerMessageController : ApiController
         return test;
     }
 
-    //POST 
-    // [HttpPost]
-    // public async Task<string> PostMessage(HttpClient httpClient, string postData)
-    // {
-    //     
-    //     using StringContent jsonContent = new(
-    //         JsonSerializer.Serialize(new
-    //         {
-    //             userId = 77,
-    //             id = 1,
-    //             title = "write code sample",
-    //             completed = false
-    //         }),
-    //         Encoding.UTF8,
-    //         "application/json");
-    //
-    //     using HttpResponseMessage response = await httpClient.PostAsync(
-    //         sharedClient.BaseAddress,
-    //         jsonContent);
-    //
-    //     response.EnsureSuccessStatusCode();
-    //
-    //     var jsonResponse = await response.Content.ReadAsStringAsync();
-    //     Console.WriteLine($"{jsonResponse}\n");
-    //     return "foo";
-    //     }
-    //
-    // }
-
-    [HttpPost]
-    public IActionResult Create(string pizza)
+    
+    [HttpPost]  
+    public async Task<IActionResult> CreateCustomerMessage([FromServices] ICustomerMessageService customerMessageService,
+        CreateCustomerMessage createCustomerMessage)
     {
-
-        return CreatedAtAction(nameof(Create), new { id = pizza }, pizza);
+        CustomerMessageResponse? customerMessage = await customerMessageService.CreateCustomerMessage(createCustomerMessage);
+        ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Succes(customerMessage);
+        return Ok(result);
     }
+    
+    
 
 }
 
