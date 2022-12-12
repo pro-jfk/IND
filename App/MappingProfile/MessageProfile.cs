@@ -13,10 +13,7 @@ public class MessageProfile : Profile
     /// </summary>
     public MessageProfile()
     {
-        CreateMap<GetMessage, Message>()
-            .IgnoreDestination(m => m.DateSent)
-            .IgnoreDestination(m => m.Id);
-
+        CreateMap<CreateMessage, Message>();
         CreateMap<Message, MessageResponse>();
     }
 }

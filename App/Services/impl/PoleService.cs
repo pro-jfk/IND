@@ -38,6 +38,7 @@ public class PoleService : IPoleService
 
     public async Task<PoleResponse> UpdatePole(CreatePole updatePole)
     {
+        // Pole test = await _poleRepository.GetFirstASync(p => p.Id == updatePole.PoleId);
         Pole pole = _mapper.Map<Pole>(updatePole);
         Pole result = await _poleRepository.UpdateAsync(pole);
         return _mapper.Map<PoleResponse>(result);

@@ -3,7 +3,7 @@
 public class CreatePole
 {
     //Pole ID
-    public int PoleId { get; set; }
+    public int Id { get; set; }
     //Location ID
-    public int LocationId { get; set; }
+    public int EmergencyShelterId { get; set; }
 }

@@ -1,5 +1,6 @@
 using App.Extensions;
 using App.Models;
+using App.Responses;
 using AutoMapper;
 using Core.Entities;
 
@@ -9,6 +10,7 @@ public class PoleProfile : Profile
 {
     public PoleProfile()
     {
-        CreateMap<GetPole, Pole>();
+        CreateMap<CreatePole, Pole>();
+        CreateMap<Pole, PoleResponse>();
     }
 }

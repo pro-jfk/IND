@@ -19,5 +19,6 @@ public static class DependencyInjection
         services.AddScoped<IEmergencyShelterRepository, EmergencyShelterRepository>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
+        services.AddScoped<IPoleRepository, PoleRepository>();
     }
 }

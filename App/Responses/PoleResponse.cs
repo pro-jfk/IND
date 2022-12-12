@@ -5,6 +5,6 @@ public class PoleResponse
     //ID of pole
     public int Id { get; set; }
     //Location of pole
-    public int LocationId { get; set; }
+    public int EmergencyShelterId { get; set; }
     
 }

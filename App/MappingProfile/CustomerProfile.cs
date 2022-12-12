@@ -13,10 +13,7 @@ public class CustomerProfile : Profile
     /// </summary>
     public CustomerProfile()
     {
-        CreateMap<CreateCustomer, Customer>()
-            .IgnoreDestination(c => c.DateAdded)
-            .IgnoreDestination(c => c.Messages);
-        
+        CreateMap<CreateCustomer, Customer>();
         CreateMap<Customer, CustomerResponse>();
     }
 }

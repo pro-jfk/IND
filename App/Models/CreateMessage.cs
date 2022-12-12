@@ -2,6 +2,7 @@
 
 public class CreateMessage
 {
+    public int Id { get; set; }
     //Type of message
     public string Type { get; set; }
     //File Url
