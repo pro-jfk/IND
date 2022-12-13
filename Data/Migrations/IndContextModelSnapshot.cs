@@ -58,7 +58,7 @@ namespace Data.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Core.Entities.Customer_Message", b =>
+            modelBuilder.Entity("Core.Entities.CustomerMessage", b =>
                 {
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -69,17 +69,24 @@ namespace Data.Migrations
                     b.Property<DateTime>("DateReceived")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
                     b.Property<bool>("StatusPrinted")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("StatusReceived")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("TimesPrinted")
+                        .HasColumnType("int");
+
                     b.HasKey("CustomerId", "MessageId");
 
                     b.HasIndex("MessageId");
 
-                    b.ToTable("Customer_Messages");
+                    b.ToTable("CustomerMessages");
                 });
 
             modelBuilder.Entity("Core.Entities.EmergencyShelter", b =>
@@ -140,9 +147,6 @@ namespace Data.Migrations
                     b.Property<int>("EmergencyShelterId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Location")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EmergencyShelterId");
@@ -161,7 +165,7 @@ namespace Data.Migrations
                     b.Navigation("EmergencyShelter");
                 });
 
-            modelBuilder.Entity("Core.Entities.Customer_Message", b =>
+            modelBuilder.Entity("Core.Entities.CustomerMessage", b =>
                 {
                     b.HasOne("Core.Entities.Customer", "Customer")
                         .WithMany()
