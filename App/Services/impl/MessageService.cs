@@ -10,18 +10,24 @@ public class MessageService : IMessageService
 {
     private readonly IMessageRepository _messageRepository;
     private readonly IMapper _mapper;
+    private readonly ICustomerMessageService _customerMessageService;
 
-    public MessageService(IMessageRepository messageRepository, IMapper mapper)
+
+    public MessageService(IMessageRepository messageRepository, IMapper mapper, ICustomerMessageService customerMessageService)
     {
         _messageRepository = messageRepository;
         _mapper = mapper;
+        _customerMessageService = customerMessageService;
     }
-
+    
+ 
     public async Task<MessageResponse> CreateMessage(CreateMessage createMessage)
     {
         Message message = _mapper.Map<Message>(createMessage);
         message.DateSent = DateTime.Now;
         Message result = await _messageRepository.AddAsync(message);
+
+        await _customerMessageService.CreateCustomerMessage(message.CustomerId,message.Id);
         return _mapper.Map<MessageResponse>(result);
     }
 
@@ -30,7 +36,7 @@ public class MessageService : IMessageService
         Message result = await _messageRepository.GetFirstASync(m => m.CustomerId == id);
         return _mapper.Map<MessageResponse>(result);
     }
-    
+
     public async Task<IEnumerable<MessageResponse>> GetMessages()
     {
         List<Message> result = await _messageRepository.GetAllAsync();
