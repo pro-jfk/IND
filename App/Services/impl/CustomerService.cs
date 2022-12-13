@@ -29,4 +29,30 @@ public class CustomerService : ICustomerService
         Customer result = await _customerRepository.AddAsync(customer);
         return _mapper.Map<CustomerResponse>(result);
     }
+
+    public async Task<CustomerResponse> GetCustomer(int id)
+    {
+        Customer result = await _customerRepository.GetFirstASync(c => c.Id == id);
+        return _mapper.Map<CustomerResponse>(result);
+    }
+    
+    public async Task<IEnumerable<CustomerResponse>> GetCustomers()
+    {
+        List<Customer> result = await _customerRepository.GetAllAsync();
+        return _mapper.Map<List<CustomerResponse>>(result);
+    }
+
+    public async Task<CustomerResponse> UpdateCustomer(CreateCustomer updateCustomer)
+    {
+        Customer customer = _mapper.Map<Customer>(UpdateCustomer);
+        Customer result = await _customerRepository.UpdateAsync(customer);
+        return _mapper.Map<CustomerResponse>(result);
+    }
+    
+    public async Task<CustomerResponse> DeleteCustomer(int id)
+    {
+        Customer customer = await _customerRepository.GetFirstASync(c => c.Id == id);
+        Customer result = await _customerRepository.DeleteAsync(customer);
+        return _mapper.Map<CustomerResponse>(result);
+    }
 }

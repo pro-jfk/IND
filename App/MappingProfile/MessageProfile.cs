@@ -14,7 +14,8 @@ public class MessageProfile : Profile
     public MessageProfile()
     {
         CreateMap<GetMessage, Message>()
-            .IgnoreDestination(m => m.DateSent);
+            .IgnoreDestination(m => m.DateSent)
+            .IgnoreDestination(m => m.Id);
 
         CreateMap<Message, MessageResponse>();
     }

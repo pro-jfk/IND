@@ -1,3 +1,4 @@
+using App.Extensions;
 using App.Models;
 using AutoMapper;
 using Core.Entities;
@@ -11,6 +12,7 @@ public class EmergencyShelterProfile : Profile
     /// </summary>
     public EmergencyShelterProfile()
     {
-        CreateMap<GetEmergencyShelter, EmergencyShelter>();
+        CreateMap<GetEmergencyShelter, EmergencyShelter>()
+            .IgnoreDestination(shelter => shelter.CustomerAmount);
     }
 }
