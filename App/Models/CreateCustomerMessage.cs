@@ -1,13 +1,15 @@
-﻿namespace App.Responses;
+﻿namespace App.Models;
 
-public class Customer_MessageResponse
+public class CreateCustomerMessage
 {
-    //If message is recieved by Customer
+    //Message received
     public bool StatusReceived { get; set; }
-    //If message is printed by Customer
+    //Message printed
     public bool StatusPrinted { get; set; }
-    //Time when message was recieved by Customer
+    //Date when message was received
     public DateTime DateReceived { get; set; }
+
+    public int TimesPrinted { get; set; }
     
     //Message ID
     public int MessageId { get; set; }
