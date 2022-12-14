@@ -37,6 +37,19 @@ public class CustomerMessageService : ICustomerMessageService
 
         return _mapper.Map<CustomerMessageResponse>(customerMessage);
     }
+    
+    //Get CustomerMessage
+    
+    public async Task<CustomerMessageResponse> GetCustomerMessage(int customerId, int messageId)
+    {
+        CustomerMessage customerMessage =
+            await _customerMessageRepository.GetFirstASync(cm =>
+                cm.CustomerId == customerId && cm.MessageId == messageId);
+        return _mapper.Map<CustomerMessageResponse>(customerMessage);
+    }
+    
+    
+    
     //Update CustomerMessage Print Details
     public async Task<CustomerMessageResponse> UpdateCustomerMessagePrint(int customerId, int messageId)
     {
