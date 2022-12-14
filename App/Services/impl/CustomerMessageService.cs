@@ -30,12 +30,15 @@ public class CustomerMessageService : ICustomerMessageService
     //Create CustomerMessage
     public async Task<CustomerMessageResponse> CreateCustomerMessage(int customerId, int messageId)
     {
-        CustomerMessage customerMessage = new CustomerMessage();
-        customerMessage.CustomerId = customerId;
-        customerMessage.MessageId = messageId;
-
-
-        return _mapper.Map<CustomerMessageResponse>(customerMessage);
+        CreateCustomerMessage createCustomerMessage = new CreateCustomerMessage
+        {
+            CustomerId = customerId,
+            MessageId = messageId
+        };
+        CustomerMessage customerMessage = _mapper.Map<CustomerMessage>(createCustomerMessage);
+        CustomerMessage result = await _customerMessageRepository.AddAsync(customerMessage);
+        
+        return _mapper.Map<CustomerMessageResponse>(result);
     }
     
     //Get CustomerMessage
