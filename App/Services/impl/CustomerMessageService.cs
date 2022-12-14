@@ -27,16 +27,43 @@ public class CustomerMessageService : ICustomerMessageService
         _customerMessageRepository = customerMessageRepository;
         _mapper = mapper;
     }
-    public async Task<CustomerMessageResponse> CreateCustomerMessage(CreateCustomerMessage createCustomerMessage)
+    //Create CustomerMessage
+    public async Task<CustomerMessageResponse> CreateCustomerMessage(int customerId, int messageId)
     {
-        CustomerMessage customerMessage = _mapper.Map<CustomerMessage>(createCustomerMessage);
-        customerMessage.CustomerId = 1;
-        PrintMessage();
-        _customerMessageRepository.UpdateAsync();
-        return NotImplementedException;
-        
-        }
+        CustomerMessage customerMessage = new CustomerMessage();
+        customerMessage.CustomerId = customerId;
+        customerMessage.MessageId = messageId;
 
+
+        return _mapper.Map<CustomerMessageResponse>(customerMessage);
+    }
+    //Update CustomerMessage Print Details
+    public async Task<CustomerMessageResponse> UpdateCustomerMessagePrint(int customerId, int messageId)
+    {
+        CustomerMessage customerMessage = await _customerMessageRepository.GetFirstASync(cm => cm.CustomerId == customerId && cm.MessageId == messageId );        customerMessage.TimesPrinted += 1;
+
+        if (customerMessage.TimesPrinted >= 1)
+        {
+            customerMessage.StatusPrinted = true;
+        }
+        CustomerMessage result = await _customerMessageRepository.UpdateAsync(customerMessage);
+        return _mapper.Map<CustomerMessageResponse>(result);
+    }
+    
+    //Update CustomerMessage Received Details
+
+    public async Task<CustomerMessageResponse> UpdateCustomerMessageReceived(int customerId, int messageId)
+    {
+        CustomerMessage customerMessage = await _customerMessageRepository.GetFirstASync(cm => cm.CustomerId == customerId && cm.MessageId == messageId );
+        //customerMessage = _mapper.Map<CustomerMessage>();
+        customerMessage.StatusReceived = true;
+        customerMessage.DateReceived = DateTime.Now;
+        CustomerMessage result = await _customerMessageRepository.UpdateAsync(customerMessage);
+        return _mapper.Map<CustomerMessageResponse>(result);
+    }
+
+    //API-call to PrintNode
+    //Docs: https://www.printnode.com/en/docs/api/curl
     public async void PrintMessage()
     {
         var bytes = Encoding.UTF8.GetBytes(ApiToken);
