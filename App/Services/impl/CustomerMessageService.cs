@@ -50,8 +50,12 @@ public class CustomerMessageService : ICustomerMessageService
                 cm.CustomerId == customerId && cm.MessageId == messageId);
         return _mapper.Map<CustomerMessageResponse>(customerMessage);
     }
-    
-    
+
+    public async Task<IEnumerable<CustomerMessageResponse>> GetCustomerMessages()
+    {
+        List < CustomerMessage > result = await _customerMessageRepository.GetAllAsync();
+        return _mapper.Map<List<CustomerMessageResponse>>(result);
+    }
     
     //Update CustomerMessage Print Details
     public async Task<CustomerMessageResponse> UpdateCustomerMessagePrint(int customerId, int messageId)

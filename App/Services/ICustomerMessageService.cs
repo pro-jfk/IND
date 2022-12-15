@@ -8,6 +8,7 @@ public interface ICustomerMessageService
 {
     Task<CustomerMessageResponse> CreateCustomerMessage(int customerId, int messageId);
     Task<CustomerMessageResponse> GetCustomerMessage(int customerId, int messageId);
+    Task<IEnumerable<CustomerMessageResponse>> GetCustomerMessages();
     Task<CustomerMessageResponse> UpdateCustomerMessagePrint(int customerId, int messageId );
     Task<CustomerMessageResponse> UpdateCustomerMessageReceived(int customerId, int messageId);
 

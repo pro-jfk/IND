@@ -17,6 +17,14 @@ public class CustomerMessageController : ApiController
         return Ok(result);
     }
 
+    [HttpGet]
+
+    public async Task<IActionResult> GetCustomerMessages([FromServices] ICustomerMessageService customerMessageService)
+    {
+        IEnumerable<CustomerMessageResponse> customerMessages = await customerMessageService.GetCustomerMessages();
+        ApiResult<IEnumerable<CustomerMessageResponse>> result = ApiResult<IEnumerable<CustomerMessageResponse>>.Succes(customerMessages);
+        return Ok(result);
+    }
 
     [HttpPatch]  
     public async Task<IActionResult> PatchCustomerMessagePrint([FromServices] ICustomerMessageService customerMessageService,
