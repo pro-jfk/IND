@@ -29,5 +29,8 @@ public class Customer : BaseEntity
     //Emergency Shelter
     public int EmergencyShelterId { get; set; }
     public EmergencyShelter EmergencyShelter { get; set; }
-   
+    
+    
+    public ICollection<CustomerMessage> CustomerMessages { get; set; }
+
 }

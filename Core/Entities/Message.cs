@@ -20,5 +20,8 @@ public class Message : BaseEntity
     // Customer
     public int CustomerId { get; set; }
     public Customer Customer { get; set; }
+    
+    public ICollection<CustomerMessage> CustomerMessages { get; set; }
+
 
 }
