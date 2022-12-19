@@ -6,11 +6,12 @@ namespace App.Services;
 
 public interface ICustomerMessageService
 {
-    Task<CustomerMessageResponse> CreateCustomerMessage(int customerId, int messageId);
+    Task<CustomerMessageResponse> CreateCustomerMessage( CreateCustomerMessage createCustomerMessage);
     Task<CustomerMessageResponse> GetCustomerMessage(int customerId, int messageId);
     Task<IEnumerable<CustomerMessageResponse>> GetCustomerMessages();
-    Task<CustomerMessageResponse> UpdateCustomerMessagePrint(int customerId, int messageId );
-    Task<CustomerMessageResponse> UpdateCustomerMessageReceived(int customerId, int messageId);
+    Task<CustomerMessageResponse> UpdateCustomerMessagePrintJob(int customerId, int messageId, bool statusPrinted );
+    Task<CustomerMessageResponse> UpdateCustomerMessageReceived(int customerId, int messageId, DateTime dateTime, bool statusReceived);
+    Task<CustomerMessageResponse> DeleteCustomerMessage(int customerId, int messageId);
 
-   
+    
 }

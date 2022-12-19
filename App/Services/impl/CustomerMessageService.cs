@@ -53,26 +53,27 @@ public class CustomerMessageService : ICustomerMessageService
     }
     
     //Update CustomerMessage Print Details
-    public async Task<CustomerMessageResponse> UpdateCustomerMessagePrintJob(int customerId, int messageId)
+    public async Task<CustomerMessageResponse> UpdateCustomerMessagePrintJob(int customerId, int messageId, bool statusPrinted)
     {
         CustomerMessage customerMessage = await _customerMessageRepository.GetFirstASync(cm => cm.CustomerId == customerId && cm.MessageId == messageId );        customerMessage.TimesPrinted += 1;
-
-        while (customerMessage.TimesPrinted >= 1)
-        {
-            customerMessage.StatusPrinted = true;
-        }
+        customerMessage.StatusPrinted = statusPrinted;
+        customerMessage.TimesPrinted += 1;
+        // while (customerMessage.TimesPrinted >= 1)
+        // {
+        //     customerMessage.StatusPrinted = true;
+        // }
         CustomerMessage result = await _customerMessageRepository.UpdateAsync(customerMessage);
         return _mapper.Map<CustomerMessageResponse>(result);
     }
     
     //Update CustomerMessage Received Details
 
-    public async Task<CustomerMessageResponse> UpdateCustomerMessageReceived(int customerId, int messageId, DateTime dateTime)
+    public async Task<CustomerMessageResponse> UpdateCustomerMessageReceived(int customerId, int messageId, DateTime dateReceived, bool statusReceived)
     {
         CustomerMessage customerMessage = await _customerMessageRepository.GetFirstASync(cm => cm.CustomerId == customerId && cm.MessageId == messageId );
         //customerMessage = _mapper.Map<CustomerMessage>();
-        customerMessage.DateReceived = dateTime;
-        customerMessage.StatusReceived = true;
+        customerMessage.DateReceived = dateReceived;
+        customerMessage.StatusReceived = statusReceived;
         CustomerMessage result = await _customerMessageRepository.UpdateAsync(customerMessage);
         return _mapper.Map<CustomerMessageResponse>(result);
     }
