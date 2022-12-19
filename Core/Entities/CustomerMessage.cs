@@ -7,6 +7,17 @@ namespace Core.Entities;
 
 public class CustomerMessage : BaseEntity
 {
+    //Customer
+   
+    public int CustomerId { get; set; }
+    public Customer Customer { get; set; }
+    //Message
+ 
+    public int MessageId { get; set; }
+    public Message Message { get; set; }
+    
+    
+    
     //If message is received by Customer
     public bool StatusReceived { get; set; }
     //If message is printed by Customer
@@ -15,13 +26,4 @@ public class CustomerMessage : BaseEntity
     public DateTime DateReceived { get; set; }
 
     public int TimesPrinted { get; set; }
-    //Message
-    public int MessageId { get; set; }
-    public Message Message { get; set; }
-    
-    //Customer
-    public int CustomerId { get; set; }
-    public Customer Customer { get; set; }
-
-
 }
