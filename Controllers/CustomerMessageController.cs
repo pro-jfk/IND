@@ -8,7 +8,7 @@ namespace API.Controllers;
 
 public class CustomerMessageController : ApiController
 {
-    [HttpGet]
+    [HttpGet("{customerId}/{messageId}")]
     public async Task<IActionResult> GetCustomerMessage([FromServices] ICustomerMessageService customerMessageService, int customerId,
         int messageId)
     {
@@ -18,7 +18,6 @@ public class CustomerMessageController : ApiController
     }
 
     [HttpGet]
-
     public async Task<IActionResult> GetCustomerMessages([FromServices] ICustomerMessageService customerMessageService)
     {
         IEnumerable<CustomerMessageResponse> customerMessages = await customerMessageService.GetCustomerMessages();
@@ -26,23 +25,33 @@ public class CustomerMessageController : ApiController
         return Ok(result);
     }
 
-    [HttpPatch]  
-    public async Task<IActionResult> PatchCustomerMessagePrint([FromServices] ICustomerMessageService customerMessageService,
+    [HttpPatch("PrintJob")]  
+    public async Task<IActionResult> PatchCustomerMessagePrintJob([FromServices] ICustomerMessageService customerMessageService,
         int customerId, int messageId)
     {
-        CustomerMessageResponse? customerMessage = await customerMessageService.UpdateCustomerMessagePrint(customerId, messageId);
+        CustomerMessageResponse? customerMessage = await customerMessageService.UpdateCustomerMessagePrintJob(customerId, messageId);
         ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Succes(customerMessage);
         return Ok(result);
     }
 
-    [HttpPatch]
+    [HttpPatch("Received")]
     public async Task<IActionResult> PatchCustomerMessageReceived([FromServices] ICustomerMessageService customerMessageService,
-        int customerId, int messageId)
+        int customerId, int messageId, DateTime dateTime)
     {
-        CustomerMessageResponse customerMessage = await customerMessageService.UpdateCustomerMessageReceived(customerId, messageId);
+        CustomerMessageResponse customerMessage = await customerMessageService.UpdateCustomerMessageReceived(customerId, messageId, dateTime);
         ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Succes(customerMessage);
         return Ok(result);
     }
-    
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteCustomerMessage(
+        [FromServices] ICustomerMessageService customerMessageService, int customerId, int messageId )
+    {
+        CustomerMessageResponse customerMessage =
+            await customerMessageService.DeleteCustomerMessage(customerId, messageId);
+        ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Succes(customerMessage);
+        return Ok(result);
+    }
+
 
 }
