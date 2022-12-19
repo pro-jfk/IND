@@ -44,7 +44,7 @@ public class CustomerService : ICustomerService
 
     public async Task<CustomerResponse> UpdateCustomer(CreateCustomer updateCustomer)
     {
-        Customer customer = _mapper.Map<Customer>(UpdateCustomer);
+        Customer customer = _mapper.Map<Customer>(updateCustomer);
         Customer result = await _customerRepository.UpdateAsync(customer);
         return _mapper.Map<CustomerResponse>(result);
     }
