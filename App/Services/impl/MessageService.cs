@@ -2,7 +2,9 @@ using App.Models;
 using App.Responses;
 using AutoMapper;
 using Core.Entities;
+using Data;
 using Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.Services.impl;
 
@@ -11,8 +13,8 @@ public class MessageService : IMessageService
     private readonly IMessageRepository _messageRepository;
     private readonly IMapper _mapper;
     private readonly ICustomerMessageService _customerMessageService;
-
-
+    
+    
     public MessageService(IMessageRepository messageRepository, IMapper mapper, ICustomerMessageService customerMessageService)
     {
         _messageRepository = messageRepository;
@@ -20,15 +22,20 @@ public class MessageService : IMessageService
         _customerMessageService = customerMessageService;
     }
     
- 
+    
     public async Task<MessageResponse> CreateMessage(CreateMessage createMessage)
     {
         Message message = _mapper.Map<Message>(createMessage);
         message.DateSent = DateTime.Now;
         Message result = await _messageRepository.AddAsync(message);
-
-        await _customerMessageService.CreateCustomerMessage(message.CustomerId,message.Id);
-        return _mapper.Map<MessageResponse>(result);
+        MessageResponse resultMapped =  _mapper.Map<MessageResponse>(result);
+        CreateCustomerMessage createCustomerMessage = new CreateCustomerMessage
+        {
+            CustomerId = message.CustomerId,
+            MessageId = message.Id
+        };
+        await _customerMessageService.CreateCustomerMessage(createCustomerMessage);
+        return resultMapped;
     }
 
     public async Task<MessageResponse> GetMessage(int id)
