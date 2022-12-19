@@ -25,20 +25,20 @@ public class CustomerMessageController : ApiController
         return Ok(result);
     }
 
-    [HttpPatch("PrintJob")]  
+    [HttpPatch("{customerId}/{messageId}/printjob")]  
     public async Task<IActionResult> PatchCustomerMessagePrintJob([FromServices] ICustomerMessageService customerMessageService,
-        int customerId, int messageId)
+        int customerId, int messageId, bool statusPrinted)
     {
-        CustomerMessageResponse? customerMessage = await customerMessageService.UpdateCustomerMessagePrintJob(customerId, messageId);
+        CustomerMessageResponse? customerMessage = await customerMessageService.UpdateCustomerMessagePrintJob(customerId, messageId, statusPrinted);
         ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Succes(customerMessage);
         return Ok(result);
     }
 
-    [HttpPatch("Received")]
+    [HttpPatch("{customerId}/{messageId}/received")]
     public async Task<IActionResult> PatchCustomerMessageReceived([FromServices] ICustomerMessageService customerMessageService,
-        int customerId, int messageId, DateTime dateTime)
+        int customerId, int messageId, DateTime dateTime, bool statusReceived)
     {
-        CustomerMessageResponse customerMessage = await customerMessageService.UpdateCustomerMessageReceived(customerId, messageId, dateTime);
+        CustomerMessageResponse customerMessage = await customerMessageService.UpdateCustomerMessageReceived(customerId, messageId, dateTime, statusReceived);
         ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Succes(customerMessage);
         return Ok(result);
     }
