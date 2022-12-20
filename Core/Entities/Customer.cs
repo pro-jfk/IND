@@ -18,6 +18,8 @@ public class Customer : BaseEntity
     public string Origin { get; set; }
     //Languages spoken by Customer
     public string LanguagesSpoken { get; set; }
+
+    public string FingerPrint { get; set; }
     //Phone number of Customer
     public string PhoneNumber { get; set; }
     //Time Customer was created
