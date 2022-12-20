@@ -13,9 +13,8 @@ public static class DataExtension
 
         services.AddDbContext<IndContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-                .LogTo(Console.WriteLine)
-                .EnableSensitiveDataLogging());
-
+                .LogTo(Console.WriteLine));
+    
         return services;
     }
 }
