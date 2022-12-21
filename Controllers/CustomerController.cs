@@ -24,6 +24,13 @@ public class CustomerController: ApiController
         return Ok(result);
     }
 
+    [HttpPost("{customerId}/fingerprint")]
+    public async Task<IActionResult> PostFingerprint([FromServices] ICustomerService customerService, int customerId,
+        string encodedFingerprint)
+    {
+        Console.Write($"Hello {customerId}{encodedFingerprint}");
+        return Ok();
+    }
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCustomer([FromServices] ICustomerService customerService,
         int id)

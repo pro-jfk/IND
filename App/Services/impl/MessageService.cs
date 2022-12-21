@@ -13,12 +13,14 @@ public class MessageService : IMessageService
     private readonly IMessageRepository _messageRepository;
     private readonly IMapper _mapper;
     private readonly ICustomerMessageService _customerMessageService;
+    private readonly ICustomerRepository _customerRepository;
     
-    
-    public MessageService(IMessageRepository messageRepository, IMapper mapper, ICustomerMessageService customerMessageService)
+    // public MessageResponse? NotImplementedException { get; set; }
+    public MessageService(IMessageRepository messageRepository, IMapper mapper, ICustomerMessageService customerMessageService, ICustomerRepository customerRepository)
     {
         _messageRepository = messageRepository;
         _mapper = mapper;
+        _customerRepository = customerRepository;
         _customerMessageService = customerMessageService;
     }
     
@@ -40,9 +42,17 @@ public class MessageService : IMessageService
 
     public async Task<MessageResponse> GetMessage(int id)
     {
-        Message result = await _messageRepository.GetFirstASync(m => m.CustomerId == id);
-        return _mapper.Map<MessageResponse>(result);
+        int customerId = 1;
+        // if ((await _customerRepository.GetFirstASync(c => c.Id == customerId)).FingerPrint == fingerPrint)
+        // {
+            Message result = await _messageRepository.GetFirstASync(m => m.CustomerId == id);
+            return _mapper.Map<MessageResponse>(result);
+        // }
+        //
+        // return NotImplementedException;
     }
+
+  
 
     public async Task<IEnumerable<MessageResponse>> GetMessages()
     {
