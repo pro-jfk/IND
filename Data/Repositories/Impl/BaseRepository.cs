@@ -49,7 +49,17 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     public async Task<TEntity> AddAsync(TEntity entity)
     {
         var addedEntity = (await DbSet.AddAsync(entity)).Entity;
-        await Context.SaveChangesAsync();
+
+        try
+        {
+            await Context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new DbUpdateException(e.Message);
+        }
+        
 
         return addedEntity;
     }
@@ -62,8 +72,15 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
         DbSet.Update(entity);
-        await Context.SaveChangesAsync();
-
+        try
+        {
+            await Context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new DbUpdateException(e.Message);
+        }
         return entity;
     }
 
@@ -75,7 +92,15 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     public async Task<TEntity> DeleteAsync(TEntity entity)
     {
         var removedEntity = DbSet.Remove(entity).Entity;
-        await Context.SaveChangesAsync();
+        try
+        {
+            await Context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new DbUpdateException(e.Message);
+        }
 
         return removedEntity;
     }
