@@ -54,6 +54,7 @@ public class MessageService : IMessageService
     {
         Message message = _mapper.Map<Message>(updateMessage);
         Message result = await _messageRepository.UpdateAsync(message);
+        
         return _mapper.Map<MessageResponse>(result);
     }
 
