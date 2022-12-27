@@ -40,7 +40,7 @@ public class MessageService : IMessageService
 
     public async Task<MessageResponse> GetMessage(int id)
     {
-        Message result = await _messageRepository.GetFirstASync(m => m.CustomerId == id);
+        Message result = await _messageRepository.GetFirstASync(m => m.Id == id);
         return _mapper.Map<MessageResponse>(result);
     }
 
@@ -59,7 +59,7 @@ public class MessageService : IMessageService
 
     public async Task<MessageResponse> DeleteMessage(int id)
     {
-        Message message = await _messageRepository.GetFirstASync(m => m.CustomerId == id);
+        Message message = await _messageRepository.GetFirstASync(m => m.Id == id);
         Message result = await _messageRepository.DeleteAsync(message);
         return _mapper.Map<MessageResponse>(result);
     }
