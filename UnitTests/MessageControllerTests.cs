@@ -22,8 +22,8 @@ public class MessageControllerTests
             .ReturnsAsync(new MessageResponse { Id = 1, Type = "test message" });
 
         var apiResultMock = new Mock<ApiResult<MessageResponse>>();
-        apiResultMock.SetupGet(x => x.Succeeded).Returns(true);
-        apiResultMock.SetupGet(x => x.Result).Returns(new MessageResponse  { Id = 1, Type = "test message" });
+        // apiResultMock.SetupGet(x => x.Sucess).Returns(true);
+        // apiResultMock.SetupGet(x => x.Result).Returns(new MessageResponse  { Id = 1, Type = "test message" });
           
           var controller = new MessageController();
 
