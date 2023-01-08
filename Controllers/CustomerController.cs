@@ -1,9 +1,7 @@
 using App.Models;
-using App.Responses;
 using App.Services;
-using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace API.Controllers;
 
@@ -20,23 +18,25 @@ public class CustomerController: ApiController
         CreateCustomer createCustomer)
     {
         CustomerResponse? customer = await customerService.CreateCustomer(createCustomer);
-        ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Succes(customer);
+        ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
-
-    [HttpPost("{customerId}/fingerprint")]
-    public async Task<IActionResult> PostFingerprint([FromServices] ICustomerService customerService, int customerId,
-        string encodedFingerprint)
-    {
-        Console.Write($"Hello {customerId}{encodedFingerprint}");
-        return Ok();
-    }
+    //
+    // [HttpPost("{id}/fingerprint")]
+    // public async Task<IActionResult> PostFingerprint([FromServices] ICustomerService customerService, int id,
+    //     string fingerprint)
+    // {
+    //     bool verified = await customerService.VerifyFingerprint(id, fingerprint);
+    //     ApiResult<bool> result = ApiResult<bool>.Success(verified);
+    //     return Ok(result);
+    //     
+    // }
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCustomer([FromServices] ICustomerService customerService,
         int id)
     {
         CustomerResponse? customer = await customerService.GetCustomer(id);
-        ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Succes(customer);
+        ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
     
@@ -44,7 +44,7 @@ public class CustomerController: ApiController
     public async Task<IActionResult> GetCustomers([FromServices] ICustomerService customerService)
     {
         IEnumerable<CustomerResponse> customer = await customerService.GetCustomers();
-        ApiResult<IEnumerable<CustomerResponse>> result = ApiResult<IEnumerable<CustomerResponse>>.Succes(customer);
+        ApiResult<IEnumerable<CustomerResponse>> result = ApiResult<IEnumerable<CustomerResponse>>.Success(customer);
         return Ok(result);
     }
 
@@ -52,7 +52,7 @@ public class CustomerController: ApiController
     public async Task<IActionResult> UpdateCustomer([FromServices] ICustomerService customerService, CreateCustomer createCustomer)
     {
         CustomerResponse? customer = await customerService.UpdateCustomer(createCustomer);
-        ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Succes(customer);
+        ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
     
@@ -60,7 +60,7 @@ public class CustomerController: ApiController
     public async Task<IActionResult> DeleteCustomer([FromServices] ICustomerService customerService, int id)
     {
         CustomerResponse? customer = await customerService.DeleteCustomer(id);
-        ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Succes(customer);
+        ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
 }

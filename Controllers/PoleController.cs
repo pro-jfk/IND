@@ -12,7 +12,7 @@ public class PoleController : ApiController
         CreatePole createPole)
     {
         PoleResponse? pole = await poleService.CreatePole(createPole);
-        ApiResult<PoleResponse> result = ApiResult<PoleResponse>.Succes(pole);
+        ApiResult<PoleResponse> result = ApiResult<PoleResponse>.Success(pole);
         return Ok(result);
     }
 
@@ -20,7 +20,7 @@ public class PoleController : ApiController
     public async Task<IActionResult> GetPole([FromServices] IPoleService poleService, int id)
     {
         PoleResponse? pole = await poleService.GetPole(id);
-        ApiResult<PoleResponse> result = ApiResult<PoleResponse>.Succes(pole);
+        ApiResult<PoleResponse> result = ApiResult<PoleResponse>.Success(pole);
         return Ok(result);
     }
 
@@ -28,7 +28,7 @@ public class PoleController : ApiController
     public async Task<IActionResult> GetPoles([FromServices] IPoleService poleService)
     {
         IEnumerable<PoleResponse> pole = await poleService.GetPole();
-        ApiResult<IEnumerable<PoleResponse>> result = ApiResult<IEnumerable<PoleResponse>>.Succes(pole);
+        ApiResult<IEnumerable<PoleResponse>> result = ApiResult<IEnumerable<PoleResponse>>.Success(pole);
         return Ok(result);
     }
 
@@ -37,7 +37,7 @@ public class PoleController : ApiController
         CreatePole updatePole)
     {
         PoleResponse? pole = await poleService.UpdatePole(updatePole);
-        ApiResult<PoleResponse> result = ApiResult<PoleResponse>.Succes(pole);
+        ApiResult<PoleResponse> result = ApiResult<PoleResponse>.Success(pole);
         return Ok(result);
     }
 
@@ -45,7 +45,7 @@ public class PoleController : ApiController
     public async Task<IActionResult> DeletePole([FromServices] IPoleService poleService, int id)
     {
         PoleResponse? pole = await poleService.DeletePole(id);
-        ApiResult<PoleResponse> result = ApiResult<PoleResponse>.Succes(pole);
+        ApiResult<PoleResponse> result = ApiResult<PoleResponse>.Success(pole);
         return Ok(result);
     }
 }

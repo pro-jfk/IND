@@ -11,11 +11,13 @@ public class CustomerService : ICustomerService
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly IMapper _mapper;
+    private readonly IHashService _hashService;
 
-    public CustomerService(ICustomerRepository customerRepository, IMapper mapper)
+    public CustomerService(ICustomerRepository customerRepository, IMapper mapper, IHashService hashService)
     {
         _customerRepository = customerRepository;
         _mapper = mapper;
+        _hashService = hashService;
     }
     /// <summary>
     /// Create customer from the CustomerRepository
@@ -24,6 +26,11 @@ public class CustomerService : ICustomerService
     /// <returns>Type: CustomerResponse</returns>
     public async Task<CustomerResponse> CreateCustomer(CreateCustomer createCustomer)
     {
+        var salt = _hashService.CreateSalt();
+        var hashedFingerprint = await _hashService.Hash(createCustomer.FingerPrint, salt);
+        createCustomer.Salt = salt;
+        createCustomer.FingerPrint = hashedFingerprint;
+        
         Customer customer = _mapper.Map<Customer>(createCustomer);
         customer.DateAdded = DateTime.Now;
         Customer result = await _customerRepository.AddAsync(customer);
@@ -55,4 +62,12 @@ public class CustomerService : ICustomerService
         Customer result = await _customerRepository.DeleteAsync(customer);
         return _mapper.Map<CustomerResponse>(result);
     }
+
+    public async Task<bool> VerifyFingerprint(int id, string fingerprint)
+    {
+        Customer customer = await _customerRepository.GetFirstASync(c => c.Id == id);
+        bool verified = await _hashService.Verify(fingerprint, customer.Salt, customer.FingerPrint);
+        return verified;
+    }
+    
 }

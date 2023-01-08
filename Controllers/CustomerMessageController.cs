@@ -1,7 +1,6 @@
 ﻿using App.Models;
 using App.Responses;
 using App.Services;
-using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -13,7 +12,7 @@ public class CustomerMessageController : ApiController
         int messageId)
     {
         CustomerMessageResponse customerMessage = await customerMessageService.GetCustomerMessage(customerId, messageId);
-        ApiResult<CustomerMessageResponse> result =  ApiResult<CustomerMessageResponse>.Succes(customerMessage);
+        ApiResult<CustomerMessageResponse> result =  ApiResult<CustomerMessageResponse>.Success(customerMessage);
         return Ok(result);
     }
 
@@ -21,7 +20,7 @@ public class CustomerMessageController : ApiController
     public async Task<IActionResult> GetCustomerMessages([FromServices] ICustomerMessageService customerMessageService)
     {
         IEnumerable<CustomerMessageResponse> customerMessages = await customerMessageService.GetCustomerMessages();
-        ApiResult<IEnumerable<CustomerMessageResponse>> result = ApiResult<IEnumerable<CustomerMessageResponse>>.Succes(customerMessages);
+        ApiResult<IEnumerable<CustomerMessageResponse>> result = ApiResult<IEnumerable<CustomerMessageResponse>>.Success(customerMessages);
         return Ok(result);
     }
 
@@ -30,7 +29,7 @@ public class CustomerMessageController : ApiController
         int customerId, int messageId, bool statusPrinted)
     {
         CustomerMessageResponse? customerMessage = await customerMessageService.UpdateCustomerMessagePrintJob(customerId, messageId, statusPrinted);
-        ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Succes(customerMessage);
+        ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Success(customerMessage);
         return Ok(result);
     }
 
@@ -39,7 +38,7 @@ public class CustomerMessageController : ApiController
         int customerId, int messageId, DateTime dateTime, bool statusReceived)
     {
         CustomerMessageResponse customerMessage = await customerMessageService.UpdateCustomerMessageReceived(customerId, messageId, dateTime, statusReceived);
-        ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Succes(customerMessage);
+        ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Success(customerMessage);
         return Ok(result);
     }
 
@@ -49,7 +48,7 @@ public class CustomerMessageController : ApiController
     {
         CustomerMessageResponse customerMessage =
             await customerMessageService.DeleteCustomerMessage(customerId, messageId);
-        ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Succes(customerMessage);
+        ApiResult<CustomerMessageResponse> result = ApiResult<CustomerMessageResponse>.Success(customerMessage);
         return Ok(result);
     }
 

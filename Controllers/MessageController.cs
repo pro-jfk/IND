@@ -1,11 +1,8 @@
 using App.Models;
 using App.Responses;
 using App.Services;
-using Core.Entities;
-using Data;
-using Data.Repositories.Impl;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace API.Controllers;
 
@@ -16,7 +13,7 @@ public class MessageController : ApiController
         CreateMessage createMessage)
     {
         MessageResponse? message = await messageService.CreateMessage(createMessage);
-        ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Succes(message);
+        ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
         return Ok(result);
     }
 
@@ -31,7 +28,7 @@ public class MessageController : ApiController
     public async Task<IActionResult> GetMessage([FromServices] IMessageService messageService, int id)
     {
         MessageResponse? message = await messageService.GetMessage(id );
-        ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Succes(message);
+        ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
         return Ok(result);
     }
 
@@ -39,7 +36,7 @@ public class MessageController : ApiController
     public async Task<IActionResult> GetMessages([FromServices] IMessageService messageService)
     {
         IEnumerable<MessageResponse> message = await messageService.GetMessages();
-        ApiResult<IEnumerable<MessageResponse>> result = ApiResult<IEnumerable<MessageResponse>>.Succes(message);
+        ApiResult<IEnumerable<MessageResponse>> result = ApiResult<IEnumerable<MessageResponse>>.Success(message);
         return Ok(result);
     }
 
@@ -48,7 +45,7 @@ public class MessageController : ApiController
         CreateMessage updateMessage)
     {
         MessageResponse? message = await messageService.UpdateMessage(updateMessage);
-        ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Succes(message);
+        ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
         return Ok(result);
     }
 
@@ -56,7 +53,7 @@ public class MessageController : ApiController
     public async Task<IActionResult> DeleteMessage([FromServices] IMessageService messageService, int id)
     {
         MessageResponse? message = await messageService.DeleteMessage(id);
-        ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Succes(message);
+        ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
         return Ok(result);
     }
 }

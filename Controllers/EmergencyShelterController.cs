@@ -1,8 +1,6 @@
 using App.Models;
 using App.Responses;
 using App.Services;
-using Core.Entities;
-using Data.Repositories.Impl;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -15,7 +13,7 @@ public class EmergencyShelterController : ApiController
     {
         EmergencyShelterResponse? emergencyShelter =
             await emergencyShelterService.CreateEmergencyShelter(createEmergencyShelter);
-        ApiResult<EmergencyShelterResponse> result = ApiResult<EmergencyShelterResponse>.Succes(emergencyShelter);
+        ApiResult<EmergencyShelterResponse> result = ApiResult<EmergencyShelterResponse>.Success(emergencyShelter);
         return Ok(result);
     }
     
@@ -24,7 +22,7 @@ public class EmergencyShelterController : ApiController
         int id)
     {
         EmergencyShelterResponse? emergencyShelter = await emergencyShelterService.GetEmergencyShelter(id);
-        ApiResult<EmergencyShelterResponse> result = ApiResult<EmergencyShelterResponse>.Succes(emergencyShelter);
+        ApiResult<EmergencyShelterResponse> result = ApiResult<EmergencyShelterResponse>.Success(emergencyShelter);
         return Ok(result);
     }
     
@@ -32,7 +30,7 @@ public class EmergencyShelterController : ApiController
     public async Task<IActionResult> GetEmergencyShelters([FromServices] IEmergencyShelterService emergencyShelterService)
     {
         IEnumerable<EmergencyShelterResponse> emergencyShelter = await emergencyShelterService.GetEmergencyShelter();
-        ApiResult<IEnumerable<EmergencyShelterResponse>> result = ApiResult<IEnumerable<EmergencyShelterResponse>>.Succes(emergencyShelter);
+        ApiResult<IEnumerable<EmergencyShelterResponse>> result = ApiResult<IEnumerable<EmergencyShelterResponse>>.Success(emergencyShelter);
         return Ok(result);
     }
 
@@ -40,7 +38,7 @@ public class EmergencyShelterController : ApiController
     public async Task<IActionResult> UpdateEmergencyShelter([FromServices] IEmergencyShelterService emergencyShelterService, CreateEmergencyShelter updateEmergencyShelter)
     {
         EmergencyShelterResponse? emergencyShelter = await emergencyShelterService.UpdateEmergencyShelter(updateEmergencyShelter);
-        ApiResult<EmergencyShelterResponse> result = ApiResult<EmergencyShelterResponse>.Succes(emergencyShelter);
+        ApiResult<EmergencyShelterResponse> result = ApiResult<EmergencyShelterResponse>.Success(emergencyShelter);
         return Ok(result);
     }
     
@@ -48,7 +46,7 @@ public class EmergencyShelterController : ApiController
     public async Task<IActionResult> DeleteEmergencyShelter([FromServices] IEmergencyShelterService emergencyShelterService, int id)
     {
         EmergencyShelterResponse? emergencyShelter = await emergencyShelterService.DeleteEmergencyShelter(id);
-        ApiResult<EmergencyShelterResponse> result = ApiResult<EmergencyShelterResponse>.Succes(emergencyShelter);
+        ApiResult<EmergencyShelterResponse> result = ApiResult<EmergencyShelterResponse>.Success(emergencyShelter);
         return Ok(result);
     }
 }

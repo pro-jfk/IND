@@ -17,7 +17,7 @@ public class ApiResult<T>
     
     public IEnumerable<string> Errors { get; set; }
 
-    public static ApiResult<T> Succes(T result)
+    public static ApiResult<T> Success(T result)
     {
         return new ApiResult<T>(true, result, new List<string>());  
     }
