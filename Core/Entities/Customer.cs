@@ -20,7 +20,7 @@ public class Customer : BaseEntity
     //Languages spoken by Customer
     public string LanguagesSpoken { get; set; }
     
-    public string FingerPrint { get; set; }
+    public byte [] HashedFingerPrint { get; set; }
 
     public byte [] Salt { get;  set; }
     //Phone number of Customer

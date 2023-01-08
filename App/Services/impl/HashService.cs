@@ -6,19 +6,18 @@ namespace App.Services.impl;
 
 public class HashService : IHashService
 {
-    public async Task<string> Hash(string fingerprint, byte [] salt)
+   public async Task<byte []> Hash(string fingerprint, byte [] salt)
     {
-        var argon2 = new Argon2i(Encoding.UTF8.GetBytes(fingerprint));
-        argon2.Salt = salt;
-        argon2.Iterations = 2;
-        argon2.MemorySize = 65586;
-        argon2.Iterations = 4;
-        argon2.DegreeOfParallelism = 2;
-        var result = await argon2.GetBytesAsync(128);
-        return result.ToString();
+        Argon2id argon2Id= new Argon2id(Encoding.UTF8.GetBytes(fingerprint)){
+        Salt = salt,
+        Iterations = 2,
+        MemorySize = 4096,
+        DegreeOfParallelism = 3};
+        var result = await argon2Id.GetBytesAsync(128);
+        return result;
     }
 
-    public async Task<bool> Verify(string fingerprint, byte [] salt, string hash)
+    public async Task<bool> Verify(string fingerprint, byte [] salt, byte [] hash)
     {
         var newHash = await Hash(fingerprint, salt);
         // byte[] newHashBytes = Encoding.UTF8.GetBytes(newHash);
