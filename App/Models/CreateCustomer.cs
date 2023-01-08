@@ -15,6 +15,9 @@ public class CreateCustomer
     public string Origin { get; set; }
     //Languages spoken by Customer
     public string LanguagesSpoken { get; set; }
+    
+    public string FingerPrint { get; set; }
+    public byte [] Salt { get;  set; }
     //PhoneNumber
     public string PhoneNumber { get; set; }
     //EmergencyShelterID

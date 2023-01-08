@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.Metadata;
 using Core.Common;
 
 namespace Core.Entities;
@@ -18,8 +19,10 @@ public class Customer : BaseEntity
     public string Origin { get; set; }
     //Languages spoken by Customer
     public string LanguagesSpoken { get; set; }
-
+    
     public string FingerPrint { get; set; }
+
+    public byte [] Salt { get;  set; }
     //Phone number of Customer
     public string PhoneNumber { get; set; }
     //Time Customer was created
