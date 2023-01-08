@@ -13,14 +13,12 @@ public class MessageService : IMessageService
     private readonly IMessageRepository _messageRepository;
     private readonly IMapper _mapper;
     private readonly ICustomerMessageService _customerMessageService;
-    private readonly ICustomerRepository _customerRepository;
-    
-    // public MessageResponse? NotImplementedException { get; set; }
-    public MessageService(IMessageRepository messageRepository, IMapper mapper, ICustomerMessageService customerMessageService, ICustomerRepository customerRepository)
+    // private readonly ICustomerRepository _customerRepository;
+
+    public MessageService(IMessageRepository messageRepository, IMapper mapper, ICustomerMessageService customerMessageService)
     {
         _messageRepository = messageRepository;
         _mapper = mapper;
-        _customerRepository = customerRepository;
         _customerMessageService = customerMessageService;
     }
     
@@ -40,16 +38,10 @@ public class MessageService : IMessageService
         return resultMapped;
     }
 
-    public async Task<MessageResponse> GetMessage(int id)
+    public async Task<MessageResponse> GetMessage(int customerId)
     {
-        int customerId = 1;
-        // if ((await _customerRepository.GetFirstASync(c => c.Id == customerId)).FingerPrint == fingerPrint)
-        // {
-            Message result = await _messageRepository.GetFirstASync(m => m.CustomerId == id);
-            return _mapper.Map<MessageResponse>(result);
-        // }
-        //
-        // return NotImplementedException;
+        Message result = await _messageRepository.GetFirstASync(m => m.CustomerId == customerId);
+        return _mapper.Map<MessageResponse>(result);
     }
 
   
