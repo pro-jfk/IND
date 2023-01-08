@@ -16,10 +16,6 @@
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.7" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-        <PackageReference Include="Moq" Version="4.18.3" />
-        <PackageReference Include="xunit" Version="2.4.2" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
     </ItemGroup>
 
     <ItemGroup>
@@ -27,6 +23,7 @@
       <Compile Remove="Core\**" />
       <Compile Remove="Data\**" />
       <Compile Remove="Shared\**" />
+      <Compile Remove="UnitTests\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -34,6 +31,7 @@
       <EmbeddedResource Remove="Core\**" />
       <EmbeddedResource Remove="Data\**" />
       <EmbeddedResource Remove="Shared\**" />
+      <EmbeddedResource Remove="UnitTests\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -41,6 +39,7 @@
       <None Remove="Core\**" />
       <None Remove="Data\**" />
       <None Remove="Shared\**" />
+      <None Remove="UnitTests\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -48,6 +47,7 @@
       <Content Remove="Core\**" />
       <Content Remove="Data\**" />
       <Content Remove="Shared\**" />
+      <Content Remove="UnitTests\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -63,6 +63,114 @@
       <_ContentIncludedByDefault Remove="Shared\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="Shared\obj\project.packagespec.json" />
       <_ContentIncludedByDefault Remove="Shared\obj\Shared.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\API.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\API.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\App.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\appsettings.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\Core.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\Data.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\global.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\App.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Core.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Data.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\global.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\App.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Core.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Data.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\global.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\App.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Core.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Data.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\global.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\App.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Core.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Data.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\global.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\App.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Core.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Data.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\global.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\API.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\App.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\appsettings.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Core.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\Data.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\global.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.deps.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\UnitTests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\UnitTests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\UnitTests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\UnitTests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\UnitTests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\bin\Debug\net6.0\UnitTests\obj\UnitTests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\bin\Debug\net6.0\UnitTests\obj\UnitTests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="UnitTests\obj\UnitTests.csproj.nuget.dgspec.json" />
     </ItemGroup>
 
     <ItemGroup>
