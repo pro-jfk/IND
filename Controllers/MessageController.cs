@@ -40,6 +40,14 @@ public class MessageController : ApiController
         ApiResult<IEnumerable<MessageResponse>> result = ApiResult<IEnumerable<MessageResponse>>.Success(message);
         return Ok(result);
     }
+    
+    [HttpGet("/{customerId}/messages")]
+    public async Task<IActionResult> GetMessages([FromServices] IMessageService messageService, int customerId)
+    {
+        IEnumerable<MessageResponse> messages = await messageService.GetMessagesForCustomer(customerId);
+        ApiResult<IEnumerable<MessageResponse>> result = ApiResult<IEnumerable<MessageResponse>>.Success(messages);
+        return Ok(result);
+    }
 
     [HttpPut]
     public async Task<IActionResult> UpdateMessage([FromServices] IMessageService messageService,
