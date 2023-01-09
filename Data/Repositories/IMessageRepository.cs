@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using Core.Entities;
+using Core.Exceptions;
 
 namespace Data.Repositories;
 
@@ -10,16 +11,22 @@ public interface IMessageRepository
     /// </summary>
     /// <param name="predicate">id</param>
     /// <returns>Type: TEntity</returns>
-    /// <exception cref="ResourceNotFoundException">not in db</exception>
+    /// <exception cref="ResourceNotFoundException">Not in Db</exception>
     /// TODO Add all the summaries from BaseRepository in here aswell
     Task<Message> GetFirstASync(Expression<Func<Message, bool>> predicate);
     
     /// <summary>
     /// Get all Async
     /// </summary>
-    /// <param name="predicate">id</param>
-    /// <returns>Type: TEntity</returns>
+    /// <returns>Type: <list type="TEntity"></list></returns>
     Task<List<Message>> GetAllAsync();
+    
+    /// <summary>
+    /// Get all Async with a Parameter
+    /// </summary>
+    /// <param name="predicate">id</param>
+    /// <returns>Type: <list type="TEntity"></list></returns>
+    public Task<List<Message>> GetAllAsyncByParameter(Expression<Func<Message, bool>> predicate);
     
     /// <summary>
     /// Add Async
