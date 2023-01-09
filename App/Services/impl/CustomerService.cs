@@ -29,10 +29,11 @@ public class CustomerService : ICustomerService
         var salt = _hashService.CreateSalt();
         var hashedFingerprint = await _hashService.Hash(createCustomer.FingerPrint, salt);
         createCustomer.Salt = salt;
-        createCustomer.FingerPrint = hashedFingerprint;
+        // createCustomer.FingerPrint = hashedFingerprint;
         
         Customer customer = _mapper.Map<Customer>(createCustomer);
         customer.DateAdded = DateTime.Now;
+        customer.HashedFingerPrint = hashedFingerprint;
         Customer result = await _customerRepository.AddAsync(customer);
         return _mapper.Map<CustomerResponse>(result);
     }
@@ -66,7 +67,7 @@ public class CustomerService : ICustomerService
     public async Task<bool> VerifyFingerprint(int id, string fingerprint)
     {
         Customer customer = await _customerRepository.GetFirstASync(c => c.Id == id);
-        bool verified = await _hashService.Verify(fingerprint, customer.Salt, customer.FingerPrint);
+        bool verified = await _hashService.Verify(fingerprint, customer.Salt, customer.HashedFingerPrint);
         return verified;
     }
     
