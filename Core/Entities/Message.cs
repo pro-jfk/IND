@@ -17,11 +17,21 @@ public class Message : BaseEntity
     // File url
     public string FileURL { get; set; }
     
+       
+    //If message is received by Customer
+    public bool StatusReceived { get; set; }
+    //If message is printed by Customer
+    public bool StatusPrinted { get; set; }
+    //Time when message was received by Customer
+    public DateTime DateReceived { get; set; }
+
+    public int TimesPrinted { get; set; }
+    
     // Customer
     public int CustomerId { get; set; }
     public Customer Customer { get; set; }
     
-    public ICollection<CustomerMessage> CustomerMessages { get; set; }
+    // public ICollection<CustomerMessage> CustomerMessages { get; set; }
 
 
 }
