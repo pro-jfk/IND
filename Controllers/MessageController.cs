@@ -1,6 +1,7 @@
 using App.Models;
 using App.Responses;
 using App.Services;
+using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -22,7 +23,7 @@ public class MessageController : ApiController
     /// </summary>
     /// <param name="messageService">TEntity</param>
     /// <param name="id">Int</param>
-    /// <returns>Type MessageRepsonse from MessageService</returns>
+    /// <returns>Type MessageResponse from MessageService</returns>
     /// TODO Add param types, look at id for example
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetMessage([FromServices] IMessageService messageService, int id)
@@ -48,6 +49,25 @@ public class MessageController : ApiController
         ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
         return Ok(result);
     }
+    
+         [HttpPatch("{customerId}/{messageId}/print-job")]  
+     public async Task<IActionResult> PatchMessagePrintJob([FromServices] IMessageService messageService,
+         int customerId, int messageId, bool statusPrinted)
+     {
+         MessageResponse message = await messageService.UpdateMessagePrintJob(customerId, messageId, statusPrinted);
+         ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
+         return Ok(result);
+     }
+
+     [HttpPatch("{customerId}/{messageId}/received")]
+     public async Task<IActionResult> PatchMessageReceived([FromServices] IMessageService messageService,
+         int customerId, int messageId, DateTime dateTime, bool statusReceived)
+     {
+         MessageResponse message = await messageService.UpdateMessageReceived(customerId, messageId, dateTime, statusReceived);
+         ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
+         return Ok(result);
+     }
+
 
     [HttpDelete]
     public async Task<IActionResult> DeleteMessage([FromServices] IMessageService messageService, int id)

@@ -12,14 +12,14 @@ public class MessageService : IMessageService
 {
     private readonly IMessageRepository _messageRepository;
     private readonly IMapper _mapper;
-    private readonly ICustomerMessageService _customerMessageService;
+    // private readonly ICustomerMessageService _customerMessageService;
     // private readonly ICustomerRepository _customerRepository;
 
-    public MessageService(IMessageRepository messageRepository, IMapper mapper, ICustomerMessageService customerMessageService)
+    public MessageService(IMessageRepository messageRepository, IMapper mapper)
     {
         _messageRepository = messageRepository;
         _mapper = mapper;
-        _customerMessageService = customerMessageService;
+        // _customerMessageService = customerMessageService;
     }
     
     
@@ -29,12 +29,12 @@ public class MessageService : IMessageService
         message.DateSent = DateTime.Now;
         Message result = await _messageRepository.AddAsync(message);
         MessageResponse resultMapped =  _mapper.Map<MessageResponse>(result);
-        CreateCustomerMessage createCustomerMessage = new CreateCustomerMessage
-        {
-            CustomerId = message.CustomerId,
-            MessageId = message.Id
-        };
-        await _customerMessageService.CreateCustomerMessage(createCustomerMessage);
+        // CreateCustomerMessage createCustomerMessage = new CreateCustomerMessage
+        // {
+        //     CustomerId = message.CustomerId,
+        //     MessageId = message.Id
+        // };
+        // await _customerMessageService.CreateCustomerMessage(createCustomerMessage);
         return resultMapped;
     }
 
@@ -44,8 +44,7 @@ public class MessageService : IMessageService
         return _mapper.Map<MessageResponse>(result);
     }
 
-  
-
+    
     public async Task<IEnumerable<MessageResponse>> GetMessages()
     {
         List<Message> result = await _messageRepository.GetAllAsync();
@@ -58,7 +57,31 @@ public class MessageService : IMessageService
         Message result = await _messageRepository.UpdateAsync(message);
         return _mapper.Map<MessageResponse>(result);
     }
-
+    
+     //Update Message Received Details
+     public async Task<MessageResponse> UpdateMessageReceived(int customerId, int messageId, DateTime dateReceived, bool statusReceived)
+     {
+         Message message = await _messageRepository.GetFirstASync(m => m.CustomerId == customerId && m.Id == messageId );
+         message.DateReceived = dateReceived;
+         message.StatusReceived = statusReceived;
+         Message result = await _messageRepository.UpdateAsync(message);
+         return _mapper.Map<MessageResponse>(result);
+     }
+    
+    //Update CustomerMessage Print Details
+     public async Task<MessageResponse> UpdateMessagePrintJob(int customerId, int messageId, bool statusPrinted)
+     {
+         Message message = await _messageRepository.GetFirstASync(m => m.CustomerId == customerId && m.Id == messageId );
+         message.TimesPrinted += 1;
+         message.StatusPrinted = statusPrinted;
+         // while (customerMessage.TimesPrinted >= 1)
+         // {
+         //     customerMessage.StatusPrinted = true;
+         // }
+         Message result = await _messageRepository.UpdateAsync(message);
+         return _mapper.Map<MessageResponse>(result);
+     }
+     
     public async Task<MessageResponse> DeleteMessage(int id)
     {
         Message message = await _messageRepository.GetFirstASync(m => m.CustomerId == id);
