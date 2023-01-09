@@ -38,10 +38,16 @@ public class MessageService : IMessageService
         return resultMapped;
     }
 
-    public async Task<MessageResponse> GetMessage(int customerId)
+    public async Task<MessageResponse> GetMessage(int messageId)
     {
-        Message result = await _messageRepository.GetFirstASync(m => m.CustomerId == customerId);
+        Message result = await _messageRepository.GetFirstASync(m => m.Id == messageId);
         return _mapper.Map<MessageResponse>(result);
+    }
+
+    public async Task<IEnumerable<MessageResponse>> GetMessagesForCustomer(int customerId)
+    {
+        List<Message> result = await _messageRepository.GetAllAsyncByParameter(c => c.CustomerId==customerId);
+        return _mapper.Map<List<MessageResponse>>(result);
     }
 
     

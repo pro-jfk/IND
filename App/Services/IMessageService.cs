@@ -8,6 +8,7 @@ public interface IMessageService
 {
     Task<MessageResponse> CreateMessage(CreateMessage createMessage);
     Task<MessageResponse> GetMessage(int id);
+    Task<IEnumerable<MessageResponse>> GetMessagesForCustomer(int customerId);
     Task<IEnumerable<MessageResponse>> GetMessages();
     Task<MessageResponse> UpdateMessage(CreateMessage createMessage);
     
