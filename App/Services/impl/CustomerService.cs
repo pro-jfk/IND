@@ -29,8 +29,6 @@ public class CustomerService : ICustomerService
         var salt = _hashService.CreateSalt();
         var hashedFingerprint = await _hashService.Hash(createCustomer.FingerPrint, salt);
         createCustomer.Salt = salt;
-        // createCustomer.FingerPrint = hashedFingerprint;
-        
         Customer customer = _mapper.Map<Customer>(createCustomer);
         customer.DateAdded = DateTime.Now;
         customer.HashedFingerPrint = hashedFingerprint;
@@ -60,7 +58,7 @@ public class CustomerService : ICustomerService
     public async Task<CustomerResponse> DeleteCustomer(int id)
     {
         Customer customer = await _customerRepository.GetFirstASync(c => c.Id == id);
-        Customer result = await _customerRepository.DeleteAsync(customer);
+        Customer result = await _customerRepository.DeleteAsync(customer);  
         return _mapper.Map<CustomerResponse>(result);
     }
 
