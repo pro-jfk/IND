@@ -52,46 +52,7 @@ public class CustomerServiceTests
         }
     }
 
-    [Fact]
-        public async Task DeleteMessage_Successful()
-        {
-            // Arrange
-            DbContextOptions<IndContext> options = new DbContextOptionsBuilder<IndContext>()
-                .UseInMemoryDatabase(databaseName: "DeleteMessage_DeletesCorrectly")
-                .Options;
-            using (IndContext context = new IndContext(options))
-            {
-                var hashedFingerprint = Encoding.UTF8.GetBytes("fingerprintandsalt");
-                var hashServiceMock = new Mock<IHashService>();
-                hashServiceMock.Setup(h => h.Hash(It.IsAny<string>(), It.IsAny<byte []>())).ReturnsAsync(hashedFingerprint);
             
-                var customerRepository = new CustomerRepository(context);
-                var config = new MapperConfiguration(cfg => {
-                    cfg.AddProfile<CustomerProfile>();
-                });
-                var mapper = new Mapper(config);
-                var customerService = new CustomerService(customerRepository, mapper, hashServiceMock.Object);
-            
-                var customer = new CreateCustomer
-                {
-                    Id = 1234567890,
-                    FirstName = "John",
-                    LastName = "Doe",
-                    LanguagesSpoken = "English",
-                    Origin = "Canada",
-                    PhoneNumber = "+1-613-555-0149 ",
-                    EmergencyShelterId = 1
-                };
-                await customerService.CreateCustomer(customer);
-                // Act
-                await customerService.DeleteCustomer(1234567890);
-                // Assert
-            
-                await Assert.ThrowsAsync<ResourceNotFoundException>(async () => await customerRepository.GetFirstASync(m => m.Id == 1));
-            }
-        }
-        
-        
         [Fact]
         public async Task UpdateCustomer_ChangeFirstName_Successful()
         {
@@ -136,7 +97,42 @@ public class CustomerServiceTests
                 Assert.Equal("Tom", updatedCustomer.FirstName);
             }
         }
-
-    
-    
+    [Fact]
+        public async Task DeleteMessage_Successful()
+        {
+            // Arrange
+            DbContextOptions<IndContext> options = new DbContextOptionsBuilder<IndContext>()
+                .UseInMemoryDatabase(databaseName: "DeleteMessage_DeletesCorrectly")
+                .Options;
+            using (IndContext context = new IndContext(options))
+            {
+                var hashedFingerprint = Encoding.UTF8.GetBytes("fingerprintandsalt");
+                var hashServiceMock = new Mock<IHashService>();
+                hashServiceMock.Setup(h => h.Hash(It.IsAny<string>(), It.IsAny<byte []>())).ReturnsAsync(hashedFingerprint);
+            
+                var customerRepository = new CustomerRepository(context);
+                var config = new MapperConfiguration(cfg => {
+                    cfg.AddProfile<CustomerProfile>();
+                });
+                var mapper = new Mapper(config);
+                var customerService = new CustomerService(customerRepository, mapper, hashServiceMock.Object);
+            
+                var customer = new CreateCustomer
+                {
+                    Id = 1234567890,
+                    FirstName = "John",
+                    LastName = "Doe",
+                    LanguagesSpoken = "English",
+                    Origin = "Canada",
+                    PhoneNumber = "+1-613-555-0149 ",
+                    EmergencyShelterId = 1
+                };
+                await customerService.CreateCustomer(customer);
+                // Act
+                await customerService.DeleteCustomer(1234567890);
+                // Assert
+            
+                await Assert.ThrowsAsync<ResourceNotFoundException>(async () => await customerRepository.GetFirstASync(m => m.Id == 1));
+            }
+        }
 }
