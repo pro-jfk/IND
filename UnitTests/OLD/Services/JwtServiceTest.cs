@@ -9,12 +9,12 @@
 //
 // namespace UnitTests.Services;
 //
-//     public class JwtServiceTests
+//     public class JwtServiceTest
 //     {
 //         private readonly IConfiguration _configuration;
 //         private readonly IdentityUser _user;
 //
-//         public JwtServiceTests()
+//         public JwtServiceTest()
 //         {
 //             // Set up the configuration with values needed for testing
 //             _configuration = new ConfigurationBuilder()
