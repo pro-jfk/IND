@@ -1,9 +1,8 @@
 ﻿using App.Models;
 using App.Responses;
 using AutoMapper;
-using Core.Entities;
 
-namespace UnitTests.Mocks;
+namespace UnitTests.OLD.Mocks;
 
 public class MockMapper: Mock<IMapper>
 {

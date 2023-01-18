@@ -1,13 +1,10 @@
-﻿using App.Responses;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Exceptions;
 using Data;
 using Data.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Xunit.Sdk;
 
-namespace UnitTests.Repositories;
+namespace UnitTests.OLD.Repositories;
 
 public class MessageRepositoryTests
 {

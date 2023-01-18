@@ -1,17 +1,10 @@
-﻿using App.MappingProfile;
-using App.Responses;
-using App.Services;
+﻿using App.Responses;
 using App.Services.impl;
 using AutoMapper;
 using Core.Entities;
-using Core.Exceptions;
-using Data;
 using Data.Repositories;
-using Data.Repositories.Impl;
-using Microsoft.EntityFrameworkCore;
 
-
-namespace UnitTests.Services;
+namespace UnitTests.OLD.Services;
 
 public class MessageServiceTests 
 {

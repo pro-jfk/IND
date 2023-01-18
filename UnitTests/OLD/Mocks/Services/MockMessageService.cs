@@ -1,9 +1,8 @@
 ﻿using App.Responses;
 using App.Services;
 using Core.Entities;
-using Core.Exceptions;
 
-namespace UnitTests.Mocks.Services;
+namespace UnitTests.OLD.Mocks.Services;
 
 public class MockMessageService : Mock<IMessageService>
 {

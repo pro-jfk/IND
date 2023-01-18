@@ -3,8 +3,8 @@ using App.Responses;
 using Core.Entities;
 using Core.Exceptions;
 using Data.Repositories;
-using Moq;
-namespace UnitTests.Mocks.Repositories;
+
+namespace UnitTests.OLD.Mocks.Repositories;
 
 public class MockMessageRepository: Mock<IMessageRepository>
 {
