@@ -9,7 +9,7 @@ using Data;
 using Data.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
 
-namespace UnitTests.NewServices;
+namespace UnitTests.New;
 
 public class CustomerServiceTests
 {

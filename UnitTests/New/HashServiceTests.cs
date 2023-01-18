@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using App.Services.impl;
 
-namespace UnitTests.Services;
+namespace UnitTests.New;
 
 public class HashServiceTests
 {

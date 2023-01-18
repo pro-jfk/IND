@@ -1,14 +1,13 @@
-﻿using Core.Common;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Exceptions;
 using Data;
 using Data.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
 
-namespace UnitTests.NewServices;
+namespace UnitTests.New;
 
 
-public class RepositoriesTest
+public class RepositoryPatternTests
 {
     [Fact]
     public async Task GetFirstASync_ReturnsCorrectEntity()
@@ -121,6 +120,4 @@ public class RepositoriesTest
             Assert.Equal(1, result.First().Id);
         }
     }
-
-
 }
