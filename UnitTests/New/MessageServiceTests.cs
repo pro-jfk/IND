@@ -2,13 +2,12 @@
 using App.Models;
 using App.Services.impl;
 using AutoMapper;
-using Core.Entities;
 using Core.Exceptions;
 using Data;
 using Data.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
 
-namespace UnitTests.NewServices;
+namespace UnitTests.New;
 
 public class MessageServiceTests
 {
