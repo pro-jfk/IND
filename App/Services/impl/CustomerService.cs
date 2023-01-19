@@ -28,8 +28,8 @@ public class CustomerService : ICustomerService
     {
         var salt = _hashService.CreateSalt();
         var hashedFingerprint = await _hashService.Hash(createCustomer.FingerPrint, salt);
-        createCustomer.Salt = salt;
         Customer customer = _mapper.Map<Customer>(createCustomer);
+        customer.Salt = salt;
         customer.DateAdded = DateTime.Now;
         customer.HashedFingerPrint = hashedFingerprint;
         Customer result = await _customerRepository.AddAsync(customer);
