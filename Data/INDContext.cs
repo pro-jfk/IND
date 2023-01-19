@@ -23,13 +23,5 @@ public class IndContext : DbContext
     {
         modelBuilder.Entity<CustomerMessage>()
             .HasKey(cm => new{cm.CustomerId,cm.MessageId}); //Creates Compound PKey for joined table Customer_Messages
-        
-        modelBuilder.Entity<Customer>()
-            .Property(c => c.HashedFingerPrint  )
-            .HasColumnType("BINARY(32)");
-        
-        modelBuilder.Entity<Customer>()
-            .Property(u => u.Salt)
-            .HasColumnType("BINARY(16)");
-   }
+    }
 }
