@@ -9,6 +9,8 @@ namespace UnitTests.New;
 
 public class RepositoryPatternTests
 {
+    //For testing purposes the Message Entity is being used as Base Entity
+    // The test scenarios are all based on the Basic CRUD actions and no other special scenarios
     [Fact]
     public async Task GetFirstASync_ReturnsCorrectEntity()
     {
