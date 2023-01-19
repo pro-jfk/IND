@@ -41,7 +41,7 @@ public class MessageController : ApiController
         return Ok(result);
     }
     
-    [HttpGet("/{customerId}/messages")]
+    [HttpGet("{customerId}/messages")]
     public async Task<IActionResult> GetMessages([FromServices] IMessageService messageService, int customerId)
     {
         IEnumerable<MessageResponse> messages = await messageService.GetMessagesForCustomer(customerId);
