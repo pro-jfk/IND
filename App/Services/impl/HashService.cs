@@ -7,8 +7,9 @@ namespace App.Services.impl;
 public class HashService : IHashService
 {
    public async Task<byte []> Hash(string fingerprint, byte [] salt)
-    {
-        Argon2id argon2Id= new Argon2id(Encoding.UTF8.GetBytes(fingerprint)){
+   {
+       byte[] bytesFingerprint = Encoding.UTF8.GetBytes(fingerprint);
+        Argon2id argon2Id= new Argon2id(bytesFingerprint){
         Salt = salt,
         Iterations = 2,
         MemorySize = 4096,
@@ -21,7 +22,7 @@ public class HashService : IHashService
     {
         var newHash = await Hash(fingerprint, salt);
         // byte[] newHashBytes = Encoding.UTF8.GetBytes(newHash);
-        return hash.Equals(newHash);
+        return hash.SequenceEqual(newHash);
     }
 
     public byte[] CreateSalt()

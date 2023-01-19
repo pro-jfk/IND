@@ -6,7 +6,17 @@ namespace UnitTests.New;
 public class HashServiceTests
 {
     [Fact]
-    public async Task HashService_Hash_Verify_Success()
+    public void Hash_ThrowsException_FingerprintIsNull()
+    {
+        // Arrange
+        var hashService = new HashService();
+        var salt = hashService.CreateSalt();   
+        
+        // Assert
+        Assert.ThrowsAsync<ArgumentNullException>(()=> hashService.Hash(null, salt));
+    }
+    [Fact]
+    public async Task Verify_Success()
     {
         // Arrange
         var hashService = new HashService();
@@ -22,7 +32,7 @@ public class HashServiceTests
     }
 
     [Fact]
-    public async Task HashService_Hash_Verify_Failure()
+    public async Task Verify_Failure()
     {
         // Arrange
         var hashService = new HashService();
@@ -37,4 +47,12 @@ public class HashServiceTests
         Assert.False(result);
     }
 
+    [Fact]
+    public void CreateSalt_ReturnsByteArray()
+    {
+        var hashService = new HashService();
+        var result = hashService.CreateSalt();
+        
+        Assert.Equal(16, result.Length);
+    }
 }
