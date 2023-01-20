@@ -45,8 +45,18 @@ public class MessageController : ApiController
     public async Task<IActionResult> GetMessages([FromServices] IMessageService messageService, int customerId)
     {
         IEnumerable<MessageResponse> messages = await messageService.GetMessagesForCustomer(customerId);
-        ApiResult<IEnumerable<MessageResponse>> result = ApiResult<IEnumerable<MessageResponse>>.Success(messages);
-        return Ok(result);
+        if (messages.Count() != 0)
+        {
+            
+            ApiResult<IEnumerable<MessageResponse>> result = ApiResult<IEnumerable<MessageResponse>>.Success(messages);
+            return Ok(result);
+        }
+        else
+        {
+            ApiResult<IEnumerable<MessageResponse>> result = ApiResult<IEnumerable<MessageResponse>>.Failure("Not in DB");
+            return Ok(result);
+        }
+        
     }
 
     [HttpPut]

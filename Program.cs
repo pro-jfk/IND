@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var IkWilKaas = "_ikWilKaas";
 
 // Add services to the container.
 builder.Services.AddDataServices(builder.Configuration);
@@ -14,6 +15,16 @@ builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.Re
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: IkWilKaas,policy =>
+    {
+        policy
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowAnyOrigin();
+    });
+});
 
 var app = builder.Build();
 
@@ -24,9 +35,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(IkWilKaas);
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+// app.UseAuthorization();
 
 app.MapControllers();
 
