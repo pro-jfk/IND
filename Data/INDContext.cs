@@ -1,10 +1,13 @@
 ﻿using Core.Entities;
+using Core.Entities.Auth;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
 namespace Data;
 
-public class IndContext : DbContext
+public class IndContext : IdentityDbContext<ApplicationUser>
 {
     /// <summary>
     /// A DbContext instance represents a session with the database and can be used to query and save instances of your entities
@@ -23,5 +26,6 @@ public class IndContext : DbContext
     {
         modelBuilder.Entity<CustomerMessage>()
             .HasKey(cm => new{cm.CustomerId,cm.MessageId}); //Creates Compound PKey for joined table Customer_Messages
+        base.OnModelCreating(modelBuilder);
     }
 }

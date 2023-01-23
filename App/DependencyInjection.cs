@@ -27,6 +27,7 @@ public static class DependencyInjection
         services.AddScoped<IPoleService, PoleService>();
         // services.AddScoped<ICustomerMessageService, CustomerMessageService>();
         services.AddScoped<IHashService, HashService>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
     }
 
     private static void RegisterAutoMapper(this IServiceCollection services)
