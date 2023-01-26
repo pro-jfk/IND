@@ -21,4 +21,7 @@ public class CreateCustomer
     public string PhoneNumber { get; set; }
     //EmergencyShelterID
     public int EmergencyShelterId { get; set; }
+    
+    //For Prototype purposes
+    public int FingerprintIdArduino { get; set; }
 }

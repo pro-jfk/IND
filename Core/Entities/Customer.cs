@@ -21,7 +21,7 @@ public class Customer : BaseEntity
     public string LanguagesSpoken { get; set; }
     
     public byte [] HashedFingerPrint { get; set; }
-
+    
     public byte [] Salt { get;  set; }
     //Phone number of Customer
     public string PhoneNumber { get; set; }
@@ -35,7 +35,8 @@ public class Customer : BaseEntity
     public int EmergencyShelterId { get; set; }
     public EmergencyShelter EmergencyShelter { get; set; }
     
-    
+    //For Prototype purposes
+    public int FingerprintIdArduino { get; set; }
     public ICollection<CustomerMessage> CustomerMessages { get; set; }
 
 }
