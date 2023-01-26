@@ -1,5 +1,7 @@
+using App.Auth;
 using App.Models;
 using App.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -31,6 +33,8 @@ public class CustomerController: ApiController
     //     return Ok(result);
     //     
     // }
+    
+    [Authorize(Roles = UserRoles.User)]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCustomer([FromServices] ICustomerService customerService,
         int id)
@@ -39,7 +43,7 @@ public class CustomerController: ApiController
         ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
-    
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpGet]
     public async Task<IActionResult> GetCustomers([FromServices] ICustomerService customerService)
     {
