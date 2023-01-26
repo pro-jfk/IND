@@ -3,6 +3,7 @@ using App.Responses;
 using AutoMapper;
 using Core.Entities;
 using Data.Repositories;
+using System.IO.Ports;
 
 namespace App.Services.impl;
 
@@ -68,5 +69,34 @@ public class CustomerService : ICustomerService
         bool verified = await _hashService.Verify(fingerprint, customer.Salt, customer.HashedFingerPrint);
         return verified;
     }
-    
+    //For Prototype purposes
+    public async Task<bool> VerifyFingerprintArduino(int id)
+    {
+        Customer customer = await _customerRepository.GetFirstASync(c => c.Id == id);
+        SerialPort arduinoPort = new SerialPort();
+        arduinoPort.BaudRate = 115200;
+        arduinoPort.PortName = "COM7";
+        arduinoPort.Open();
+        arduinoPort.WriteLine("V");
+        arduinoPort.WriteLine(customer.FingerprintIdArduino.ToString());
+        
+        while (true)
+        {
+            string identifier = arduinoPort.ReadLine();
+            if (identifier == "Verify")
+            {
+                string success = arduinoPort.ReadLine();
+                if (success == "1")
+                {
+                    arduinoPort.Close();
+                    return true;
+                }
+                else
+                {
+                    arduinoPort.Close();
+                    return false;
+                }
+            }
+        }
+    }
 }

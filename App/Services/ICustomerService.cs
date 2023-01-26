@@ -13,5 +13,7 @@ public interface ICustomerService
     Task<CustomerResponse> DeleteCustomer(int id);
     
     Task<bool> VerifyFingerprint(int id, string fingerprint);
-    
+
+    Task<bool> VerifyFingerprintArduino(int id);
+
 }

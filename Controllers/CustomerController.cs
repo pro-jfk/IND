@@ -67,4 +67,11 @@ public class CustomerController: ApiController
         ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
+
+    //For Prototype purposes
+    [HttpPost("{id}/checkfingerprint")]
+    public async Task<bool> VerifyFingerprintArduino([FromServices] ICustomerService customerService, int id)
+    {
+        return await customerService.VerifyFingerprintArduino(id);
+    }
 }
