@@ -1,3 +1,4 @@
+using System.Globalization;
 using App.Models;
 using App.Responses;
 using AutoMapper;
@@ -73,30 +74,32 @@ public class CustomerService : ICustomerService
     public async Task<bool> VerifyFingerprintArduino(int id)
     {
         Customer customer = await _customerRepository.GetFirstASync(c => c.Id == id);
-        SerialPort arduinoPort = new SerialPort();
-        arduinoPort.BaudRate = 115200;
-        arduinoPort.PortName = "COM7";
+        SerialPort arduinoPort = new SerialPort("COM7", 115200);
         arduinoPort.Open();
+        Thread.Sleep(2000);
         arduinoPort.WriteLine("V");
         arduinoPort.WriteLine(customer.FingerprintIdArduino.ToString());
         
         while (true)
         {
-            string identifier = arduinoPort.ReadLine();
-            if (identifier == "Verify")
+            string identifier = arduinoPort.ReadLine(); 
+            if (identifier == "Verify\r")
             {
                 string success = arduinoPort.ReadLine();
-                if (success == "1")
+                if (success == "1\r")
                 {
+                    arduinoPort.WriteLine("");
                     arduinoPort.Close();
                     return true;
                 }
-                else
+                else if (success == "0\r")
                 {
+                    arduinoPort.WriteLine("");
                     arduinoPort.Close();
                     return false;
                 }
             }
+         
         }
     }
 }
