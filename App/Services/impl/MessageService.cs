@@ -1,3 +1,5 @@
+using System.Net.Http.Headers;
+using System.Text;
 using App.Models;
 using App.Responses;
 using AutoMapper;
@@ -14,6 +16,14 @@ public class MessageService : IMessageService
     private readonly IMapper _mapper;
     // private readonly ICustomerMessageService _customerMessageService;
     // private readonly ICustomerRepository _customerRepository;
+    
+     //PrintNode API token and API
+     private readonly HttpClient _sharedClient = new()
+     {
+         BaseAddress = new Uri("https://api.printnode.com/printjobs")
+     };
+     private readonly string _apiToken = "GsShY5qYDo9GuQZf0ydEt7Mn4kvZhrHQ4d1d3gVeyDY";
+
 
     public MessageService(IMessageRepository messageRepository, IMapper mapper)
     {
@@ -47,6 +57,7 @@ public class MessageService : IMessageService
     public async Task<IEnumerable<MessageResponse>> GetMessagesForCustomer(int customerId)
     {
         List<Message> result = await _messageRepository.GetAllAsyncByParameter(c => c.CustomerId==customerId);
+        
         return _mapper.Map<List<MessageResponse>>(result);
     }
 
@@ -94,4 +105,34 @@ public class MessageService : IMessageService
         Message result = await _messageRepository.DeleteAsync(message);
         return _mapper.Map<MessageResponse>(result);
     }
+    
+    //API-call to PrintNode
+    //Docs: https://www.printnode.com/en/docs/api/curl
+    public async void PrintMessage()
+     {
+         var apiTokenBytes = Encoding.UTF8.GetBytes(_apiToken);
+         string encodedApiTokenBytes = Convert.ToBase64String(apiTokenBytes);
+         
+         _sharedClient.DefaultRequestHeaders.Authorization =
+             new AuthenticationHeaderValue("Basic", encodedApiTokenBytes);
+         
+         var values = new Dictionary<string, string>
+         {
+             { "printerId", "71908910" },
+             { "title", "example" },
+             { "contentType", "pdf_uri" },
+             {"content", "https://cdn.discordapp.com/attachments/1023870407155134468/1068479233233539132/Voorbeeld_bon.pdf" },
+             //Printer configurations
+             {"supports_custom_paper_size", "true"},
+             {"fit_to_page", "true"}
+         };
+         var content = new FormUrlEncodedContent(values);
+         using var response = await _sharedClient.PostAsync(_sharedClient.BaseAddress, content);
+         var responseString = await response.Content.ReadAsStringAsync();
+
+         Console.WriteLine(responseString);
+         var jsonResponse = await response.Content.ReadAsStringAsync();
+         Console.WriteLine($"{jsonResponse}\n");
+     }
+
 }
