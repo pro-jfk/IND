@@ -12,8 +12,6 @@ public interface ICustomerService
     Task<CustomerResponse> UpdateCustomer(CreateCustomer createCustomer);
     Task<CustomerResponse> DeleteCustomer(int id);
     
-    Task<bool> VerifyFingerprint(int id, string fingerprint);
-
     Task<bool> VerifyFingerprintArduino(int id);
-
+    
 }

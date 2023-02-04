@@ -5,6 +5,9 @@ using AutoMapper;
 using Core.Entities;
 using Data.Repositories;
 using System.IO.Ports;
+using System.Net.Http.Headers;
+using System.Text;
+
 
 namespace App.Services.impl;
 
@@ -21,6 +24,11 @@ public class CustomerService : ICustomerService
         _mapper = mapper;
         _hashService = hashService;
     }
+    private readonly HttpClient _sharedClient = new()
+    {
+        BaseAddress = new Uri("https://api.printnode.com/printjobs")
+    };
+    private readonly string _apiToken = "GsShY5qYDo9GuQZf0ydEt7Mn4kvZhrHQ4d1d3gVeyDY";
     /// <summary>
     /// Create customer from the CustomerRepository
     /// </summary>
@@ -74,7 +82,7 @@ public class CustomerService : ICustomerService
     public async Task<bool> VerifyFingerprintArduino(int id)
     {
         Customer customer = await _customerRepository.GetFirstASync(c => c.Id == id);
-        SerialPort arduinoPort = new SerialPort("COM7", 115200);
+        SerialPort arduinoPort = new SerialPort("COM3", 115200);
         arduinoPort.Open();
         Thread.Sleep(2000);
         arduinoPort.WriteLine("V");
@@ -90,6 +98,8 @@ public class CustomerService : ICustomerService
                 {
                     arduinoPort.WriteLine("");
                     arduinoPort.Close();
+                    
+                    PrintMessage();
                     return true;
                 }
                 else if (success == "0\r")
@@ -102,4 +112,35 @@ public class CustomerService : ICustomerService
          
         }
     }
+    public async void PrintMessage()
+    {
+        var bytes = Encoding.UTF8.GetBytes(_apiToken);
+        string encodeUri = Convert.ToBase64String(bytes);
+         
+        _sharedClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Basic", encodeUri);
+
+        var bytesTest = Encoding.UTF8.GetBytes("hello");
+        string testContent = Convert.ToBase64String(bytesTest);
+         
+        var values = new Dictionary<string, string>
+        {
+            { "printerId", "72022296" },
+            { "title", "example" },
+            { "contentType", "pdf_uri" },
+            {"content", "https://cdn.discordapp.com/attachments/1023870407155134468/1068479233233539132/Voorbeeld_bon.pdf" },
+            //Printer configurations
+            {"supports_custom_paper_size", "true"},
+            {"fit_to_page", "true"}
+        };
+        var content = new FormUrlEncodedContent(values);
+        using var response = await _sharedClient.PostAsync(_sharedClient.BaseAddress, content);
+        var responseString = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(responseString);
+        var jsonResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"{jsonResponse}\n");
+    }
+
+    
 }

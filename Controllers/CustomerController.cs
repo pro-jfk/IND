@@ -34,7 +34,6 @@ public class CustomerController: ApiController
     //     
     // }
     
-    // [Authorize(Roles = UserRoles.User)]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCustomer([FromServices] ICustomerService customerService,
         int id)
@@ -43,7 +42,6 @@ public class CustomerController: ApiController
         ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
-    // [Authorize(Roles = UserRoles.Admin)]
     [HttpGet]
     public async Task<IActionResult> GetCustomers([FromServices] ICustomerService customerService)
     {
@@ -67,7 +65,7 @@ public class CustomerController: ApiController
         ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
-
+    
     //For Prototype purposes
     [HttpPost("{id}/checkfingerprint")]
     public async Task<bool> VerifyFingerprintArduino([FromServices] ICustomerService customerService, int id)
@@ -77,4 +75,5 @@ public class CustomerController: ApiController
         return answer;
 
     }
+
 }
