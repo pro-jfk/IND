@@ -15,7 +15,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         Context = context;
         DbSet = context.Set<TEntity>();
     }
-    
+
     /// <summary>
     /// Gets first Async
     /// </summary>
@@ -30,7 +30,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
         return await DbSet.Where(predicate).FirstOrDefaultAsync();
     }
-    
+
     /// <summary>
     /// Get all Async
     /// </summary>
@@ -40,7 +40,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     {
         return await DbSet.ToListAsync();
     }
-    
+
     /// <summary>
     /// Add Async
     /// </summary>
@@ -79,5 +79,4 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
         return removedEntity;
     }
-
 }

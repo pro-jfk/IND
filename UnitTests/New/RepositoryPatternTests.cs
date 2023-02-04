@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UnitTests.New;
 
-
 public class RepositoryPatternTests
 {
     //For testing purposes the Message Entity is being used as Base Entity
@@ -22,7 +21,7 @@ public class RepositoryPatternTests
         {
             var repository = new BaseRepository<Message>(context);
 
-            var entity1 = new Message { Id = 1, FileURL = "fileshostingserver.com", Type = "invite"};
+            var entity1 = new Message { Id = 1, FileURL = "fileshostingserver.com", Type = "invite" };
             var entity2 = new Message { Id = 2, FileURL = "fileshostingserver.com", Type = "invite" };
             await repository.AddAsync(entity1);
             await repository.AddAsync(entity2);
@@ -34,7 +33,7 @@ public class RepositoryPatternTests
             Assert.Equal(1, result.Id);
         }
     }
-    
+
     [Fact]
     public async Task AddAsync_AddsCorrectly()
     {
@@ -55,8 +54,8 @@ public class RepositoryPatternTests
             Assert.Equal(1, addedEntity.Id);
         }
     }
-    
-    
+
+
     [Fact]
     public async Task GetFirstASync_ThrowsExceptionWhenEntityNotFound()
     {
@@ -94,8 +93,8 @@ public class RepositoryPatternTests
             Assert.Null(deletedEntity);
         }
     }
-    
-    
+
+
     [Fact]
     public async Task GetAllAsyncByParameter_ReturnsCorrectEntities()
     {
@@ -106,7 +105,7 @@ public class RepositoryPatternTests
         using (IndContext context = new IndContext(options))
         {
             var repository = new MessageRepository(context);
-        
+
             var message1 = new Message { Id = 1, CustomerId = 1, FileURL = "fileshostingserver.com", Type = "invite" };
             var message2 = new Message { Id = 2, CustomerId = 1, FileURL = "fileshostingserver.com", Type = "invite" };
             var message3 = new Message { Id = 3, CustomerId = 2, FileURL = "fileshostingserver.com", Type = "invite" };

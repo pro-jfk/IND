@@ -21,9 +21,7 @@ public class MessageServiceTests
         using (IndContext context = new IndContext(options))
         {
             var messageRepository = new MessageRepository(context);
-            var config = new MapperConfiguration(cfg => {
-                cfg.AddProfile<MessageProfile>();
-            });
+            var config = new MapperConfiguration(cfg => { cfg.AddProfile<MessageProfile>(); });
             var mapper = new Mapper(config);
             var messageService = new MessageService(messageRepository, mapper);
 
@@ -33,7 +31,6 @@ public class MessageServiceTests
                 CustomerId = 1,
                 FileURL = "fileshostingserver.com",
                 Type = "invite"
-                
             };
             // Act
             var createdMessage = await messageService.CreateMessage(createMessage);
@@ -75,59 +72,54 @@ public class MessageServiceTests
     }
 
     [Fact]
-        public async Task GetMessagesForCustomer_ReturnsCorrectMessages()
+    public async Task GetMessagesForCustomer_ReturnsCorrectMessages()
+    {
+        // Arrange
+        DbContextOptions<IndContext> options = new DbContextOptionsBuilder<IndContext>()
+            .UseInMemoryDatabase(databaseName: "GetMessagesForCustomer_ReturnsCorrectMessages")
+            .Options;
+        using (IndContext context = new IndContext(options))
         {
-            // Arrange
-            DbContextOptions<IndContext> options = new DbContextOptionsBuilder<IndContext>()
-                .UseInMemoryDatabase(databaseName: "GetMessagesForCustomer_ReturnsCorrectMessages")
-                .Options;
-            using (IndContext context = new IndContext(options))
+            var messageRepository = new MessageRepository(context);
+            var config = new MapperConfiguration(cfg => { cfg.AddProfile<MessageProfile>(); });
+            var mapper = new Mapper(config);
+            var messageService = new MessageService(messageRepository, mapper);
+
+            var message1 = new CreateMessage
             {
-                var messageRepository = new MessageRepository(context);
-                var config = new MapperConfiguration(cfg => {
-                    cfg.AddProfile<MessageProfile>();
-                });
-                var mapper = new Mapper(config);
-                var messageService = new MessageService(messageRepository, mapper);
-
-                var message1 = new CreateMessage
-                {
-                    Id = 1,
-                    CustomerId = 1,
-                    FileURL = "fileshostingserver.com",
-                    Type = "invite"
-                };
-                var message2 = new CreateMessage
-                {
-                    Id = 2,
-                    CustomerId = 2,
-                    FileURL = "fileshostingserver.com",
-                    Type = "invite"
-                    
-                };
-                var message3 = new CreateMessage
-                {
-                    Id = 3,
-                    CustomerId = 2,
-                    FileURL = "fileshostingserver.com",
-                    Type = "invite"
-                };
-                await messageService.CreateMessage(message1);
-                await messageService.CreateMessage(message2);
-                await messageService.CreateMessage(message3);
-                // Act
-                var result = (await messageService.GetMessagesForCustomer(2)).ToList();
-                // Assert
-                Assert.Equal(2, result.Count());
-                Assert.Equal(2, result.ElementAt(0).Id);
-                Assert.Equal(3, result.ElementAt(1).Id);
-
-            }
+                Id = 1,
+                CustomerId = 1,
+                FileURL = "fileshostingserver.com",
+                Type = "invite"
+            };
+            var message2 = new CreateMessage
+            {
+                Id = 2,
+                CustomerId = 2,
+                FileURL = "fileshostingserver.com",
+                Type = "invite"
+            };
+            var message3 = new CreateMessage
+            {
+                Id = 3,
+                CustomerId = 2,
+                FileURL = "fileshostingserver.com",
+                Type = "invite"
+            };
+            await messageService.CreateMessage(message1);
+            await messageService.CreateMessage(message2);
+            await messageService.CreateMessage(message3);
+            // Act
+            var result = (await messageService.GetMessagesForCustomer(2)).ToList();
+            // Assert
+            Assert.Equal(2, result.Count());
+            Assert.Equal(2, result.ElementAt(0).Id);
+            Assert.Equal(3, result.ElementAt(1).Id);
         }
+    }
 
 
-
-        [Fact]
+    [Fact]
     public async Task UpdateMessageReceivedStatus_UpdatesStatus()
     {
         // Arrange
@@ -137,12 +129,10 @@ public class MessageServiceTests
         using (IndContext context = new IndContext(options))
         {
             var messageRepository = new MessageRepository(context);
-            var config = new MapperConfiguration(cfg => {
-                cfg.AddProfile<MessageProfile>();
-            });
+            var config = new MapperConfiguration(cfg => { cfg.AddProfile<MessageProfile>(); });
             var mapper = new Mapper(config);
             var messageService = new MessageService(messageRepository, mapper);
-    
+
             var message = new CreateMessage
             {
                 Id = 1,
@@ -154,18 +144,18 @@ public class MessageServiceTests
             await messageService.CreateMessage(message);
             var dateReceived = DateTime.Now;
             var statusReceived = true;
-            
+
             // Act
             await messageService.UpdateMessageReceived(1, 1, dateReceived, statusReceived);
             var result = await messageRepository.GetFirstASync(m => m.Id == 1);
             var test = await messageService.GetMessage(1);
-            
+
             // Assert
             Assert.Equal(dateReceived, result.DateReceived);
             Assert.Equal(statusReceived, result.StatusReceived);
         }
     }
-    
+
     [Fact]
     public async Task UpdateMessagePrintjob_UpdatesPrintJob()
     {
@@ -176,12 +166,10 @@ public class MessageServiceTests
         using (IndContext context = new IndContext(options))
         {
             var messageRepository = new MessageRepository(context);
-            var config = new MapperConfiguration(cfg => {
-                cfg.AddProfile<MessageProfile>();
-            });
+            var config = new MapperConfiguration(cfg => { cfg.AddProfile<MessageProfile>(); });
             var mapper = new Mapper(config);
             var messageService = new MessageService(messageRepository, mapper);
-    
+
             var message = new CreateMessage
             {
                 Id = 1,
@@ -202,7 +190,7 @@ public class MessageServiceTests
             Assert.Equal(statusPrinted, result.StatusPrinted);
         }
     }
-    
+
     [Fact]
     public async Task DeleteMessage_DeletesCorrectly()
     {
@@ -213,9 +201,7 @@ public class MessageServiceTests
         using (IndContext context = new IndContext(options))
         {
             var messageRepository = new MessageRepository(context);
-            var config = new MapperConfiguration(cfg => {
-                cfg.AddProfile<MessageProfile>();
-            });
+            var config = new MapperConfiguration(cfg => { cfg.AddProfile<MessageProfile>(); });
             var mapper = new Mapper(config);
             var messageService = new MessageService(messageRepository, mapper);
 
@@ -230,11 +216,9 @@ public class MessageServiceTests
             // Act
             await messageService.DeleteMessage(1);
             // Assert
-            
-            await Assert.ThrowsAsync<ResourceNotFoundException>(async () => await messageRepository.GetFirstASync(m => m.Id == 1));
+
+            await Assert.ThrowsAsync<ResourceNotFoundException>(async () =>
+                await messageRepository.GetFirstASync(m => m.Id == 1));
         }
     }
-
-
-
 }

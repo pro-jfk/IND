@@ -9,7 +9,7 @@ namespace UnitTests.OLD.Repositories;
 public class MessageRepositoryTests
 {
     private readonly IndContext _indContext;
-    
+
     //Each test run gets a new Db
     public MessageRepositoryTests()
     {
@@ -18,10 +18,11 @@ public class MessageRepositoryTests
                 .ToString());
         _indContext = new IndContext(dbOptions.Options);
     }
-   
-     
-     [Fact]
-     public async Task GetMessageByIdAsync_Returns_Message(){
+
+
+    [Fact]
+    public async Task GetMessageByIdAsync_Returns_Message()
+    {
         //Arrange 
         var messageEntity = new Message()
         {
@@ -30,33 +31,28 @@ public class MessageRepositoryTests
             FileURL = "google",
             CustomerId = 1234567890,
             DateSent = DateTime.Now
-            
         };
-        var messageRepository= new MessageRepository(_indContext);
+        var messageRepository = new MessageRepository(_indContext);
         await messageRepository.AddAsync(messageEntity);
 
         //Act
         var message = await messageRepository.GetFirstASync(m => m.Id == 1);
 
-         //Assert
-         Assert.Equal(message.Id, messageEntity.Id);
-         Assert.IsType<Message>(message);
+        //Assert
+        Assert.Equal(message.Id, messageEntity.Id);
+        Assert.IsType<Message>(message);
+    }
 
-     }
+    [Fact]
+    public async Task GetMessageById_ReturnsError()
+    {
+        var messageRepository = new MessageRepository(_indContext);
 
-     [Fact]
 
-     public async Task GetMessageById_ReturnsError()
-     {
-         var messageRepository= new MessageRepository(_indContext);
-         
+        //Execute method of SUT(ProductsRepository
+        var result = messageRepository.GetFirstASync(m => m.Id == 2);
 
-         //Execute method of SUT(ProductsRepository
-         var result =  messageRepository.GetFirstASync(m => m.Id == 2);
-
-         //Assert
+        //Assert
         await Assert.ThrowsAnyAsync<ResourceNotFoundException>(async () => await result);
-     }
-     
-     
+    }
 }

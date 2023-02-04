@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-public class CustomerController: ApiController
+public class CustomerController : ApiController
 {
     /// <summary>
     /// Post request that creates a new Customer.
@@ -23,6 +23,7 @@ public class CustomerController: ApiController
         ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
+
     //
     // [HttpPost("{id}/fingerprint")]
     // public async Task<IActionResult> PostFingerprint([FromServices] ICustomerService customerService, int id,
@@ -33,7 +34,7 @@ public class CustomerController: ApiController
     //     return Ok(result);
     //     
     // }
-    
+    [Authorize(Roles = UserRoles.User)]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCustomer([FromServices] ICustomerService customerService,
         int id)
@@ -42,6 +43,8 @@ public class CustomerController: ApiController
         ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
+
+    [Authorize(Roles = UserRoles.Admin)]
     [HttpGet]
     public async Task<IActionResult> GetCustomers([FromServices] ICustomerService customerService)
     {
@@ -51,13 +54,14 @@ public class CustomerController: ApiController
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateCustomer([FromServices] ICustomerService customerService, CreateCustomer createCustomer)
+    public async Task<IActionResult> UpdateCustomer([FromServices] ICustomerService customerService,
+        CreateCustomer createCustomer)
     {
         CustomerResponse? customer = await customerService.UpdateCustomer(createCustomer);
         ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
-    
+
     [HttpDelete]
     public async Task<IActionResult> DeleteCustomer([FromServices] ICustomerService customerService, int id)
     {
@@ -65,15 +69,22 @@ public class CustomerController: ApiController
         ApiResult<CustomerResponse> result = ApiResult<CustomerResponse>.Success(customer);
         return Ok(result);
     }
-    
+
+
+    [HttpPost("{id}/fingerprintcheck")]
+    public async Task<bool> VerifyFingerprint([FromServices] ICustomerService customerService, int id)
+    {
+        bool answer = await customerService.VerifyFingerprintArduino(id);
+        Console.WriteLine(answer);
+        return answer;
+    }
+
     //For Prototype purposes
-    [HttpPost("{id}/checkfingerprint")]
+    [HttpPost("{id}/fingerprintcheck-arduino")]
     public async Task<bool> VerifyFingerprintArduino([FromServices] ICustomerService customerService, int id)
     {
         bool answer = await customerService.VerifyFingerprintArduino(id);
         Console.WriteLine(answer);
         return answer;
-
     }
-
 }

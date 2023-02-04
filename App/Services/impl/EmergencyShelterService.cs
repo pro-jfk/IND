@@ -23,13 +23,13 @@ public class EmergencyShelterService : IEmergencyShelterService
         EmergencyShelter result = await _emergencyShelterRepository.AddAsync(emergencyShelter);
         return _mapper.Map<EmergencyShelterResponse>(result);
     }
-    
+
     public async Task<EmergencyShelterResponse> GetEmergencyShelter(int id)
     {
         EmergencyShelter result = await _emergencyShelterRepository.GetFirstASync(e => e.Id == id);
         return _mapper.Map<EmergencyShelterResponse>(result);
     }
-    
+
     public async Task<IEnumerable<EmergencyShelterResponse>> GetEmergencyShelter()
     {
         List<EmergencyShelter> result = await _emergencyShelterRepository.GetAllAsync();

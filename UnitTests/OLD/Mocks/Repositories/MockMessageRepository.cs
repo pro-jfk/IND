@@ -6,7 +6,7 @@ using Data.Repositories;
 
 namespace UnitTests.OLD.Mocks.Repositories;
 
-public class MockMessageRepository: Mock<IMessageRepository>
+public class MockMessageRepository : Mock<IMessageRepository>
 {
     public MockMessageRepository MockGetById(CreateMessage result)
     {
@@ -17,7 +17,6 @@ public class MockMessageRepository: Mock<IMessageRepository>
                 FileURL = result.FileURL,
                 Type = result.Type,
                 CustomerId = result.CustomerId
-                
             });
 
         return this;

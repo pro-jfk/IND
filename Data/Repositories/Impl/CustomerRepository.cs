@@ -4,5 +4,7 @@ namespace Data.Repositories.Impl;
 
 public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
 {
-    public CustomerRepository(IndContext context) : base(context) {}
+    public CustomerRepository(IndContext context) : base(context)
+    {
+    }
 }

@@ -10,11 +10,12 @@ public class HashServiceTests
     {
         // Arrange
         var hashService = new HashService();
-        var salt = hashService.CreateSalt();   
-        
+        var salt = hashService.CreateSalt();
+
         // Assert
-        Assert.ThrowsAsync<ArgumentNullException>(()=> hashService.Hash(null, salt));
+        Assert.ThrowsAsync<ArgumentNullException>(() => hashService.Hash(null, salt));
     }
+
     [Fact]
     public async Task Verify_Success()
     {
@@ -52,7 +53,7 @@ public class HashServiceTests
     {
         var hashService = new HashService();
         var result = hashService.CreateSalt();
-        
+
         Assert.Equal(16, result.Length);
     }
 }

@@ -12,7 +12,7 @@ public class CustomerMessageProfile : Profile
     {
         CreateMap<CreateCustomerMessage, CustomerMessage>()
             .IgnoreDestination(cm => cm.DateReceived);
-        
+
         CreateMap<CustomerMessage, CustomerMessageResponse>();
     }
 }

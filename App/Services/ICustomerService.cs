@@ -11,7 +11,7 @@ public interface ICustomerService
     Task<IEnumerable<CustomerResponse>> GetCustomers();
     Task<CustomerResponse> UpdateCustomer(CreateCustomer createCustomer);
     Task<CustomerResponse> DeleteCustomer(int id);
-    
+
+    //For prototype purposes
     Task<bool> VerifyFingerprintArduino(int id);
-    
 }

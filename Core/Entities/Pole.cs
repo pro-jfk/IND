@@ -7,7 +7,7 @@ public class Pole : BaseEntity
 {
     // PoleNumber
     public int Id { get; set; }
-    
+
     //Location of COA location
     public int EmergencyShelterId { get; set; }
     // public EmergencyShelter EmergencyShelter { get; set; }

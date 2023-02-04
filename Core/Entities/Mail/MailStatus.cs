@@ -8,8 +8,7 @@ public class MailStatus
     public string Message { get; set; }
     public string DateSent { get; set; }
     public int Id { get; set; }
-    
+
     public int MailId { get; set; }
     public virtual Mail Mail { get; set; }
-    
 }

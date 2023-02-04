@@ -10,5 +10,4 @@ public interface IAuthenticationService
     Task<Response> RegisterAdmin(RegisterModel model);
     Task<Response> Register(RegisterModel model);
     Task<LoginResponse> Login(LoginModel model);
-
 }

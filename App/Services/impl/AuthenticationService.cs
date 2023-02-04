@@ -40,7 +40,6 @@ public class AuthenticationService : IAuthenticationService
             foreach (var userRole in userRoles)
             {
                 authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-
             }
 
             var token = CreateToken(authClaims);
@@ -58,7 +57,6 @@ public class AuthenticationService : IAuthenticationService
                 RefreshToken = refreshToken,
                 Expiration = token.ValidTo
             };
-
         }
 
         return new LoginResponse();
@@ -92,23 +90,23 @@ public class AuthenticationService : IAuthenticationService
                 Message = "User creation failed! Please check user details and try again."
             };
         }
+
         if (!await _roleManager.RoleExistsAsync(UserRoles.User))
         {
             await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
         }
+
         if (await _roleManager.RoleExistsAsync(UserRoles.User))
         {
             await _userManager.AddToRoleAsync(user, UserRoles.User);
         }
-        
+
 
         return new Response { Status = "Success", Message = "User Created successfully!" };
     }
 
     public async Task<Response> RegisterAdmin(RegisterModel model)
     {
-
-
         var userExists = await _userManager.FindByNameAsync(model.Username);
         if (userExists != null)
             return new Response()
@@ -116,7 +114,7 @@ public class AuthenticationService : IAuthenticationService
                 Status = "Error",
                 Message = "User already exists!"
             };
-        
+
         ApplicationUser user = new()
         {
             SecurityStamp = Guid.NewGuid().ToString(),
@@ -129,7 +127,7 @@ public class AuthenticationService : IAuthenticationService
                 Status = "Error",
                 Message = "User creation failed! Please check user details and try again."
             };
-        
+
         if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
             await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
         if (!await _roleManager.RoleExistsAsync(UserRoles.User))
@@ -139,16 +137,17 @@ public class AuthenticationService : IAuthenticationService
         {
             await _userManager.AddToRoleAsync(user, UserRoles.Admin);
         }
+
         if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
         {
             await _userManager.AddToRoleAsync(user, UserRoles.User);
         }
+
         return new Response
         {
             Status = "Success",
             Message = "User created successfully"
         };
-
     }
 
     public async Task<TokenModel> RefreshToken(TokenModel tokenModel)
@@ -247,7 +246,7 @@ public class AuthenticationService : IAuthenticationService
             expires: DateTime.Now.AddMinutes(tokenValidityInMinutes),
             claims: authClaims,
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-            );
+        );
         return token;
     }
 
@@ -272,10 +271,11 @@ public class AuthenticationService : IAuthenticationService
 
         var tokenHandler = new JwtSecurityTokenHandler();
         var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
-        if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+        if (securityToken is not JwtSecurityToken jwtSecurityToken ||
+            !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
+                StringComparison.InvariantCultureIgnoreCase))
             throw new SecurityTokenException("Invalid token");
 
         return principal;
-
     }
 }

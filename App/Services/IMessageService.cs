@@ -11,8 +11,8 @@ public interface IMessageService
     Task<IEnumerable<MessageResponse>> GetMessagesForCustomer(int customerId);
     Task<IEnumerable<MessageResponse>> GetMessages();
     Task<MessageResponse> UpdateMessage(CreateMessage createMessage);
-    
-    Task<MessageResponse> UpdateMessagePrintJob(int customerId, int messageId, bool statusPrinted );
+
+    Task<MessageResponse> UpdateMessagePrintJob(int customerId, int messageId, bool statusPrinted);
     Task<MessageResponse> UpdateMessageReceived(int customerId, int messageId, DateTime dateTime, bool statusReceived);
     Task<MessageResponse> DeleteMessage(int id);
 }

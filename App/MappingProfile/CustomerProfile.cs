@@ -18,6 +18,5 @@ public class CustomerProfile : Profile
             .IgnoreDestination(c => c.HashedFingerPrint)
             .IgnoreDestination(c => c.DateAdded);
         CreateMap<Customer, CustomerResponse>();
-        
     }
 }

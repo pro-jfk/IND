@@ -6,7 +6,7 @@ using Data.Repositories;
 
 namespace UnitTests.OLD.Services;
 
-public class MessageServiceTests 
+public class MessageServiceTests
 {
     private readonly Mock<IMessageRepository> _mockMessageRepository;
     private readonly Mock<IMapper> _mockMapper;
@@ -19,6 +19,7 @@ public class MessageServiceTests
         _mockMapper = new Mock<IMapper>();
         _messageService = new MessageService(_mockMessageRepository.Object, _mockMapper.Object);
     }
+
     [Fact]
     public async Task GetMessage_Successful()
     {
@@ -49,15 +50,20 @@ public class MessageServiceTests
         Assert.Equal(messageResponse, result);
         Assert.Equal(messageResponse.Type, message.Type);
     }
-    
+
     [Fact]
     public async Task GetMessagesForCustomer_Succeeds()
     {
         // Arrange
         var customerId = 1;
-        var messages = new List<Message>{new Message{Id = 1,FileURL = "fileshostingserver.com",Type = "invite", CustomerId = customerId}, new Message{Id = 2, FileURL = "fileshostingserver.com", Type = "invite",CustomerId = customerId} };
-        var messageResponses = new List<MessageResponse>{new MessageResponse(), new MessageResponse()};
-        _mockMessageRepository.Setup(x => x.GetAllAsyncByParameter(m => m.CustomerId == customerId)).ReturnsAsync(messages);
+        var messages = new List<Message>
+        {
+            new Message { Id = 1, FileURL = "fileshostingserver.com", Type = "invite", CustomerId = customerId },
+            new Message { Id = 2, FileURL = "fileshostingserver.com", Type = "invite", CustomerId = customerId }
+        };
+        var messageResponses = new List<MessageResponse> { new MessageResponse(), new MessageResponse() };
+        _mockMessageRepository.Setup(x => x.GetAllAsyncByParameter(m => m.CustomerId == customerId))
+            .ReturnsAsync(messages);
         _mockMapper.Setup(x => x.Map<List<MessageResponse>>(messages)).Returns(messageResponses);
 
         // Act
@@ -103,7 +109,7 @@ public class MessageServiceTests
     //     }
     // }
 
-    
+
     // [Fact]
     // public async Task GetMessage_MessageDoesntExist_ReturnsException()
     // {
@@ -128,15 +134,16 @@ public class MessageServiceTests
         // Arrange
         var customerId = 1;
         _mockMessageRepository.Setup(x => x.GetFirstASync(m => m.CustomerId == customerId)).ReturnsAsync((Message)null);
-    
+
         // Act
         var result = await _messageService.GetMessage(customerId);
-    
+
         // Assert
         _mockMessageRepository.Verify(x => x.GetFirstASync(m => m.CustomerId == customerId), Times.Once);
         _mockMapper.Verify(x => x.Map<MessageResponse>(It.IsAny<Message>()), Times.Never);
         Assert.Null(result);
     }
+
     [Fact]
     public async Task GetMessage_MappingFails()
     {
@@ -158,15 +165,12 @@ public class MessageServiceTests
     [Fact]
     public void AddMessage()
     {
-        
     }
 
     [Fact]
     public void PutMessage_PrintAndReceivedStatus()
     {
-        
     }
-  
 }
 //Arrange
 //Act

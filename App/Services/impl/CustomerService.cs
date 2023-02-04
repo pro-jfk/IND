@@ -11,7 +11,6 @@ using System.Text;
 
 namespace App.Services.impl;
 
-
 public class CustomerService : ICustomerService
 {
     private readonly ICustomerRepository _customerRepository;
@@ -24,11 +23,7 @@ public class CustomerService : ICustomerService
         _mapper = mapper;
         _hashService = hashService;
     }
-    private readonly HttpClient _sharedClient = new()
-    {
-        BaseAddress = new Uri("https://api.printnode.com/printjobs")
-    };
-    private readonly string _apiToken = "GsShY5qYDo9GuQZf0ydEt7Mn4kvZhrHQ4d1d3gVeyDY";
+
     /// <summary>
     /// Create customer from the CustomerRepository
     /// </summary>
@@ -51,7 +46,7 @@ public class CustomerService : ICustomerService
         Customer result = await _customerRepository.GetFirstASync(c => c.Id == id);
         return _mapper.Map<CustomerResponse>(result);
     }
-    
+
     public async Task<IEnumerable<CustomerResponse>> GetCustomers()
     {
         List<Customer> result = await _customerRepository.GetAllAsync();
@@ -64,11 +59,11 @@ public class CustomerService : ICustomerService
         Customer result = await _customerRepository.UpdateAsync(customer);
         return _mapper.Map<CustomerResponse>(result);
     }
-    
+
     public async Task<CustomerResponse> DeleteCustomer(int id)
     {
         Customer customer = await _customerRepository.GetFirstASync(c => c.Id == id);
-        Customer result = await _customerRepository.DeleteAsync(customer);  
+        Customer result = await _customerRepository.DeleteAsync(customer);
         return _mapper.Map<CustomerResponse>(result);
     }
 
@@ -78,6 +73,8 @@ public class CustomerService : ICustomerService
         bool verified = await _hashService.Verify(fingerprint, customer.Salt, customer.HashedFingerPrint);
         return verified;
     }
+
+
     //For Prototype purposes
     public async Task<bool> VerifyFingerprintArduino(int id)
     {
@@ -87,60 +84,26 @@ public class CustomerService : ICustomerService
         Thread.Sleep(2000);
         arduinoPort.WriteLine("V");
         arduinoPort.WriteLine(customer.FingerprintIdArduino.ToString());
-        
+
         while (true)
         {
-            string identifier = arduinoPort.ReadLine(); 
+            string identifier = arduinoPort.ReadLine();
             if (identifier == "Verify\r")
             {
                 string success = arduinoPort.ReadLine();
-                if (success == "1\r")
+                switch (success)
                 {
-                    arduinoPort.WriteLine("");
-                    arduinoPort.Close();
-                    
-                    PrintMessage();
-                    return true;
-                }
-                else if (success == "0\r")
-                {
-                    arduinoPort.WriteLine("");
-                    arduinoPort.Close();
-                    return false;
+                    case "1\r":
+                        arduinoPort.WriteLine("");
+                        arduinoPort.Close();
+                        //PrintMessage();
+                        return true;
+                    case "0\r":
+                        arduinoPort.WriteLine("");
+                        arduinoPort.Close();
+                        return false;
                 }
             }
-         
         }
     }
-    public async void PrintMessage()
-    {
-        var bytes = Encoding.UTF8.GetBytes(_apiToken);
-        string encodeUri = Convert.ToBase64String(bytes);
-         
-        _sharedClient.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Basic", encodeUri);
-
-        var bytesTest = Encoding.UTF8.GetBytes("hello");
-        string testContent = Convert.ToBase64String(bytesTest);
-         
-        var values = new Dictionary<string, string>
-        {
-            { "printerId", "72022296" },
-            { "title", "example" },
-            { "contentType", "pdf_uri" },
-            {"content", "https://cdn.discordapp.com/attachments/1023870407155134468/1068479233233539132/Voorbeeld_bon.pdf" },
-            //Printer configurations
-            {"supports_custom_paper_size", "true"},
-            {"fit_to_page", "true"}
-        };
-        var content = new FormUrlEncodedContent(values);
-        using var response = await _sharedClient.PostAsync(_sharedClient.BaseAddress, content);
-        var responseString = await response.Content.ReadAsStringAsync();
-
-        Console.WriteLine(responseString);
-        var jsonResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"{jsonResponse}\n");
-    }
-
-    
 }

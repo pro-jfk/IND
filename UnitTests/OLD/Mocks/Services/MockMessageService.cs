@@ -18,6 +18,4 @@ public class MockMessageService : Mock<IMessageService>
 
         return this;
     }
-
-
 }

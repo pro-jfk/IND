@@ -18,10 +18,7 @@ var IkWilKaas = "_ikWilKaas";
 builder.Services.AddDataServices(builder.Configuration);
 builder.Services.AddDataAccess(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-    {
-        options.User.RequireUniqueEmail = false;
-    })
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => { options.User.RequireUniqueEmail = false; })
     .AddEntityFrameworkStores<IndContext>()
     .AddDefaultTokenProviders();
 
@@ -30,7 +27,6 @@ builder.Services.AddAuthentication(options =>
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-        
     })
     .AddJwtBearer(options =>
     {
@@ -50,13 +46,14 @@ builder.Services.AddAuthentication(options =>
     });
 
 
-builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddControllers()
+    .AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: IkWilKaas,policy =>
+    options.AddPolicy(name: IkWilKaas, policy =>
     {
         policy
             .AllowAnyMethod()

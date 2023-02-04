@@ -16,7 +16,7 @@ public static class DependencyInjection
         services.RegisterAutoMapper();
         return services;
     }
-    
+
     private static void AddServices(this IServiceCollection services)
     {
         //services.AddScoped<IMailService, MailService>();

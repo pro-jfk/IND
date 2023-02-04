@@ -6,12 +6,16 @@ public class AuthTokens
 {
     //id
     public string Id { get; set; }
+
     //Name
     public string name { get; set; }
+
     //Slug
     public string slug { get; set; }
+
     //Token
     public string token { get; set; }
+
     //Revoked
     public int revoked { get; set; }
 

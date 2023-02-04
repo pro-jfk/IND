@@ -4,7 +4,7 @@ using AutoMapper;
 
 namespace UnitTests.OLD.Mocks;
 
-public class MockMapper: Mock<IMapper>
+public class MockMapper : Mock<IMapper>
 {
     public MockMapper GetById(CreateMessage createMessage)
 

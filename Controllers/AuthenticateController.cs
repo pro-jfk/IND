@@ -10,7 +10,6 @@ namespace API.Controllers;
 
 public class AuthenticateController : ApiController
 {
-    
     private readonly IConfiguration _configuration;
 
     public AuthenticateController(
@@ -63,7 +62,8 @@ public class AuthenticateController : ApiController
 
     [HttpPost]
     [Route("refresh-token")]
-    public async Task<IActionResult> RefreshToken([FromServices] IAuthenticationService authenticationService,[FromBody] TokenModel tokenModel)
+    public async Task<IActionResult> RefreshToken([FromServices] IAuthenticationService authenticationService,
+        [FromBody] TokenModel tokenModel)
     {
         var result = authenticationService.RefreshToken(tokenModel);
         if (result.Result.AccessToken == "Error")

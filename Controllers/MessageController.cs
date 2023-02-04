@@ -28,7 +28,7 @@ public class MessageController : ApiController
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetMessage([FromServices] IMessageService messageService, int id)
     {
-        MessageResponse? message = await messageService.GetMessage(id );
+        MessageResponse? message = await messageService.GetMessage(id);
         ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
         return Ok(result);
     }
@@ -40,23 +40,22 @@ public class MessageController : ApiController
         ApiResult<IEnumerable<MessageResponse>> result = ApiResult<IEnumerable<MessageResponse>>.Success(message);
         return Ok(result);
     }
-    
+
     [HttpGet("{customerId}/messages")]
     public async Task<IActionResult> GetMessages([FromServices] IMessageService messageService, int customerId)
     {
         IEnumerable<MessageResponse> messages = await messageService.GetMessagesForCustomer(customerId);
         if (messages.Count() != 0)
         {
-            
             ApiResult<IEnumerable<MessageResponse>> result = ApiResult<IEnumerable<MessageResponse>>.Success(messages);
             return Ok(result);
         }
         else
         {
-            ApiResult<IEnumerable<MessageResponse>> result = ApiResult<IEnumerable<MessageResponse>>.Failure("Not in DB");
+            ApiResult<IEnumerable<MessageResponse>> result =
+                ApiResult<IEnumerable<MessageResponse>>.Failure("Not in DB");
             return Ok(result);
         }
-        
     }
 
     [HttpPut]
@@ -67,24 +66,25 @@ public class MessageController : ApiController
         ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
         return Ok(result);
     }
-    
-         [HttpPatch("{customerId}/{messageId}/print-job")]  
-     public async Task<IActionResult> PatchMessagePrintJob([FromServices] IMessageService messageService,
-         int customerId, int messageId, bool statusPrinted)
-     {
-         MessageResponse message = await messageService.UpdateMessagePrintJob(customerId, messageId, statusPrinted);
-         ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
-         return Ok(result);
-     }
 
-     [HttpPatch("{customerId}/{messageId}/received")]
-     public async Task<IActionResult> PatchMessageReceived([FromServices] IMessageService messageService,
-         int customerId, int messageId, DateTime dateTime, bool statusReceived)
-     {
-         MessageResponse message = await messageService.UpdateMessageReceived(customerId, messageId, dateTime, statusReceived);
-         ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
-         return Ok(result);
-     }
+    [HttpPatch("{customerId}/{messageId}/print-job")]
+    public async Task<IActionResult> PatchMessagePrintJob([FromServices] IMessageService messageService,
+        int customerId, int messageId, bool statusPrinted)
+    {
+        MessageResponse message = await messageService.UpdateMessagePrintJob(customerId, messageId, statusPrinted);
+        ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
+        return Ok(result);
+    }
+
+    [HttpPatch("{customerId}/{messageId}/received")]
+    public async Task<IActionResult> PatchMessageReceived([FromServices] IMessageService messageService,
+        int customerId, int messageId, DateTime dateTime, bool statusReceived)
+    {
+        MessageResponse message =
+            await messageService.UpdateMessageReceived(customerId, messageId, dateTime, statusReceived);
+        ApiResult<MessageResponse> result = ApiResult<MessageResponse>.Success(message);
+        return Ok(result);
+    }
 
 
     [HttpDelete]
