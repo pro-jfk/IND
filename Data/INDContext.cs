@@ -21,13 +21,13 @@ public class IndContext : IdentityDbContext<ApplicationUser>
     public DbSet<EmergencyShelter> EmergencyShelters { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<Pole> Poles { get; set; }
-    public DbSet<CustomerMessage> CustomerMessages { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<CustomerMessage>()
-            .HasKey(cm => new
-                { cm.CustomerId, cm.MessageId }); //Creates Compound PKey for joined table Customer_Messages
-        base.OnModelCreating(modelBuilder);
-    }
+    // public DbSet<CustomerMessage> CustomerMessages { get; set; }
+    //
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     modelBuilder.Entity<CustomerMessage>()
+    //         .HasKey(cm => new
+    //             { cm.CustomerId, cm.MessageId }); //Creates Compound PKey for joined table Customer_Messages
+    //     base.OnModelCreating(modelBuilder);
+    // }
 }

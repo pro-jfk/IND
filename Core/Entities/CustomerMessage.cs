@@ -3,7 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Core.Common;
 
 namespace Core.Entities;
-
+/// <summary>
+/// In case multiple customers are connected to multiple messages
+/// </summary>
 public class CustomerMessage : BaseEntity
 {
     //Customer
