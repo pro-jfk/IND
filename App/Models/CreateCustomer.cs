@@ -18,7 +18,7 @@ public class CreateCustomer
     
     public string FingerPrint { get; set; }
     
-    public int FingerprintIdArduino { get; set; }
+   
     //PhoneNumber
     public string PhoneNumber { get; set; }
     //EmergencyShelterID
