@@ -9,7 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+*.sh
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -452,3 +452,5 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+appsettings.Development.json

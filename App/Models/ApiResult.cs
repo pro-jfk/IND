@@ -2,27 +2,29 @@ namespace App.Models;
 
 public class ApiResult<T>
 {
-    private ApiResult() {}
+    private ApiResult()
+    {
+    }
 
-    private ApiResult(bool succeeded, T result, IEnumerable<string> errors)
+    private ApiResult(bool succeeded, T result, string errors)
     {
         Succeeded = succeeded;
         Result = result;
         Errors = errors;
     }
-    
-    public bool Succeeded { get; set; }
-    
-    public T Result { get; set; }
-    
-    public IEnumerable<string> Errors { get; set; }
 
-    public static ApiResult<T> Succes(T result)
+    public bool Succeeded { get; set; }
+
+    public T Result { get; set; }
+
+    public string Errors { get; set; }
+
+    public static ApiResult<T> Success(T result)
     {
-        return new ApiResult<T>(true, result, new List<string>());  
+        return new ApiResult<T>(true, result, "");
     }
 
-    public static ApiResult<T> Failure(IEnumerable<string> errors)
+    public static ApiResult<T> Failure(string errors)
     {
         return new ApiResult<T>(false, default, errors);
     }
